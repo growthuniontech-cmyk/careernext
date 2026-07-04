@@ -1,9 +1,21 @@
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import mammoth from "mammoth";
 import { PDFParse } from "pdf-parse";
+import { WorkerMessageHandler } from "pdfjs-dist/legacy/build/pdf.worker.mjs";
 import { getClaude, MODEL, isClaudeConfigured, ParsedResumeSchema } from "@/lib/ai";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser } from "@/lib/journey";
+
+// pdfjs-dist (used by pdf-parse) tries to dynamically `import()` its worker
+// module at runtime to set up a "fake worker" for Node.js — a path Next.js's
+// bundler can't resolve, since that string import isn't visible at build
+// time. Registering the handler on globalThis makes pdfjs-dist skip that
+// dynamic import entirely and use this statically-bundled copy instead.
+declare global {
+  // eslint-disable-next-line no-var
+  var pdfjsWorker: { WorkerMessageHandler: typeof WorkerMessageHandler } | undefined;
+}
+globalThis.pdfjsWorker ??= { WorkerMessageHandler };
 
 export const maxDuration = 60;
 
