@@ -1,23 +1,31 @@
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import mammoth from "mammoth";
 import { PDFParse } from "pdf-parse";
-import { WorkerMessageHandler } from "pdfjs-dist/legacy/build/pdf.worker.mjs";
 import { getClaude, MODEL, isClaudeConfigured, ParsedResumeSchema } from "@/lib/ai";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser } from "@/lib/journey";
 
-// pdfjs-dist (used by pdf-parse) tries to dynamically `import()` its worker
-// module at runtime to set up a "fake worker" for Node.js — a path Next.js's
-// bundler can't resolve, since that string import isn't visible at build
-// time. Registering the handler on globalThis makes pdfjs-dist skip that
-// dynamic import entirely and use this statically-bundled copy instead.
+export const maxDuration = 60;
+
 declare global {
   // eslint-disable-next-line no-var
-  var pdfjsWorker: { WorkerMessageHandler: typeof WorkerMessageHandler } | undefined;
+  var pdfjsWorker: { WorkerMessageHandler: unknown } | undefined;
 }
-globalThis.pdfjsWorker ??= { WorkerMessageHandler };
 
-export const maxDuration = 60;
+// pdfjs-dist (used by pdf-parse) tries to dynamically `import()` its worker
+// module at runtime to set up a "fake worker" for Node.js. Pre-loading it
+// ourselves and registering it on globalThis makes pdfjs-dist skip that
+// internal dynamic import. Done lazily inside the request's try/catch (not
+// at module top-level) so a bundling problem with this deep import can't
+// crash the whole route module.
+async function ensurePdfWorker() {
+  if (!globalThis.pdfjsWorker) {
+    const { WorkerMessageHandler } = await import(
+      "pdfjs-dist/legacy/build/pdf.worker.mjs"
+    );
+    globalThis.pdfjsWorker = { WorkerMessageHandler };
+  }
+}
 
 const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
 
@@ -60,6 +68,7 @@ export async function POST(request: Request) {
   try {
     const bytes = Buffer.from(await file.arrayBuffer());
     if (isPdf) {
+      await ensurePdfWorker();
       const parser = new PDFParse({ data: bytes });
       try {
         const result = await parser.getText();
@@ -73,7 +82,10 @@ export async function POST(request: Request) {
     }
   } catch (err) {
     console.error("text extraction failed:", err);
-    return Response.json({ error: "parse_failed" }, { status: 422 });
+    return Response.json(
+      { error: "parse_failed", debug: err instanceof Error ? err.message : String(err) },
+      { status: 422 },
+    );
   }
 
   rawText = rawText.trim();
