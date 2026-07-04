@@ -1,9 +1,9 @@
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import mammoth from "mammoth";
-import { PDFParse } from "pdf-parse";
 import { getClaude, MODEL, isClaudeConfigured, ParsedResumeSchema } from "@/lib/ai";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser } from "@/lib/journey";
+import { installDomMatrixPolyfill } from "@/lib/dommatrix-polyfill";
 
 export const maxDuration = 60;
 
@@ -12,19 +12,24 @@ declare global {
   var pdfjsWorker: { WorkerMessageHandler: unknown } | undefined;
 }
 
-// pdfjs-dist (used by pdf-parse) tries to dynamically `import()` its worker
-// module at runtime to set up a "fake worker" for Node.js. Pre-loading it
-// ourselves and registering it on globalThis makes pdfjs-dist skip that
-// internal dynamic import. Done lazily inside the request's try/catch (not
-// at module top-level) so a bundling problem with this deep import can't
-// crash the whole route module.
-async function ensurePdfWorker() {
+// pdf-parse (via pdfjs-dist) references two browser-only globals at module
+// evaluation time: `DOMMatrix` (for text-position matrix math) and a
+// dynamic `import()` of its own worker module (to set up a Node "fake
+// worker"). Both must be prepared *before* pdf-parse is imported, and both
+// must happen inside this request's try/catch — importing pdf-parse itself
+// is therefore also deferred to a dynamic import here, not a static
+// top-level one, so ordering is guaranteed and a bundling problem with any
+// of this can't crash the whole route module.
+async function loadPdfParse() {
+  installDomMatrixPolyfill();
   if (!globalThis.pdfjsWorker) {
     const { WorkerMessageHandler } = await import(
       "pdfjs-dist/legacy/build/pdf.worker.mjs"
     );
     globalThis.pdfjsWorker = { WorkerMessageHandler };
   }
+  const { PDFParse } = await import("pdf-parse");
+  return PDFParse;
 }
 
 const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
@@ -68,7 +73,7 @@ export async function POST(request: Request) {
   try {
     const bytes = Buffer.from(await file.arrayBuffer());
     if (isPdf) {
-      await ensurePdfWorker();
+      const PDFParse = await loadPdfParse();
       const parser = new PDFParse({ data: bytes });
       try {
         const result = await parser.getText();
@@ -82,10 +87,7 @@ export async function POST(request: Request) {
     }
   } catch (err) {
     console.error("text extraction failed:", err);
-    return Response.json(
-      { error: "parse_failed", debug: err instanceof Error ? err.message : String(err) },
-      { status: 422 },
-    );
+    return Response.json({ error: "parse_failed" }, { status: 422 });
   }
 
   rawText = rawText.trim();
