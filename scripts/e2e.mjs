@@ -12,6 +12,7 @@
  */
 import { createClient as createBareClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
+import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -160,26 +161,178 @@ check("6-8 tools", tools.length >= 5 && tools.length <= 9, `got ${tools.length}`
 check("has high tier", tools.some((t) => t.tier === "high"));
 check("has medium tier", tools.some((t) => t.tier === "medium"));
 
-// ---- 6. Learning path (generated once per role, cached) ----
-console.log("\n[6] Generating learning path…");
+// ---- 6. Learning path with generated verification specs (cached per role) ----
+console.log("\n[6] Generating learning path + deliverable specs…");
 const path1 = await api(cookies, "POST", "/api/learning-path");
 check("path 200", path1.status === 200, JSON.stringify(path1.json));
 const steps = path1.json?.steps ?? [];
-for (const [i, s] of steps.entries()) console.log(`      ${i + 1}. ${s.title} (~${s.estimatedHours}h)`);
+for (const [i, s] of steps.entries())
+  console.log(`      ${i + 1}. [${s.deliverable?.proof_type}] ${s.title} (~${s.estimatedHours}h)`);
 check("5 steps", steps.length === 5, `got ${steps.length}`);
+check(
+  "every step carries a structured deliverable spec",
+  steps.every(
+    (s) =>
+      s.deliverable &&
+      ["attest", "knowledge", "work", "skill"].includes(s.deliverable.proof_type) &&
+      Array.isArray(s.deliverable.criteria) &&
+      s.deliverable.criteria.length >= 1 &&
+      typeof s.deliverable.pass_threshold === "number" &&
+      "tool_evidence" in s.deliverable &&
+      typeof s.deliverable.anti_gaming_prompt === "string",
+  ),
+);
+check(
+  "final step is the absolute-gated portfolio (skill) step",
+  steps[steps.length - 1]?.deliverable?.proof_type === "skill" &&
+    steps[steps.length - 1]?.deliverable?.pass_threshold >= 0.85,
+);
+check(
+  "MCQ answers never reach the client",
+  steps.every((s) => s.deliverable?.quiz?.correctIndex === undefined),
+);
 const path2 = await api(cookies, "POST", "/api/learning-path");
 check("second request served from role cache", path2.json?.cached === true);
+// jsonb doesn't preserve key order — compare canonically
+const canon = (v) =>
+  Array.isArray(v)
+    ? v.map(canon)
+    : v && typeof v === "object"
+      ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, canon(v[k])]))
+      : v;
+check(
+  "cached specs are reused verbatim (not regenerated)",
+  JSON.stringify(canon(path2.json?.steps?.map((s) => s.deliverable))) ===
+    JSON.stringify(canon(steps.map((s) => s.deliverable))),
+);
 
-// ---- 7. Progress: complete a task, % moves by the one formula ----
-console.log("\n[7] Completing step 1…");
+// ---- 7. Verification gate: % moves only on a verified pass ----
+console.log("\n[7] Verification gating…");
 const before = await api(cookies, "GET", "/api/journey");
 check("job-ready starts at 0%", before.json?.jobReadyPercent === 0, `got ${before.json?.jobReadyPercent}`);
-const prog = await api(cookies, "POST", "/api/progress", { stepIndex: 0, completed: true });
-check("progress 200", prog.status === 200);
-check("job-ready moved to 20% (1/5)", prog.json?.jobReadyPercent === 20, `got ${prog.json?.jobReadyPercent}`);
-check("streak started", prog.json?.progress?.streak === 1);
+
+const oldEndpoint = await api(cookies, "POST", "/api/progress", { stepIndex: 0, completed: true });
+check(
+  "honor-system endpoint is gone (no click-to-complete)",
+  oldEndpoint.status === 404 || oldEndpoint.status === 405,
+  `got ${oldEndpoint.status}`,
+);
+
+const locked = await api(cookies, "POST", "/api/verify-step", {
+  stepIndex: 2,
+  submission: { reflection: "skipping ahead" },
+});
+check("later steps are locked until earlier ones verify", locked.status === 409, `got ${locked.status}`);
+
+const step0 = steps[0];
+const spec0 = step0.deliverable;
+console.log(`      step 1 is ${spec0.proof_type}-tier (threshold ${spec0.pass_threshold})`);
+
+function garbageSubmission(spec) {
+  switch (spec.proof_type) {
+    case "attest": return { reflection: "done" };
+    case "knowledge": return { mcqIndex: 0, shortAnswer: "idk it just works" };
+    case "work": return { artifact: "i did the thing", reasoning: "because" };
+    case "skill": return { link: "https://example.com", reasoning: "trust me" };
+  }
+}
+
+/** Simulates a diligent learner actually doing the step's work — the
+ *  submission must genuinely address the generated criteria to pass the gate.
+ *  On a refine verdict, the grader's feedback is fed back in (the product's
+ *  real refine → revise → pass loop). */
+const anthropic = new Anthropic();
+async function simulateLearnerWork(step, priorFeedback) {
+  const spec = step.deliverable;
+  const msg = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 4000,
+    system:
+      "You are simulating a diligent, motivated beginner who has GENUINELY completed a learning step of a career path, practicing on a fictional D2C skincare brand called GlowLab. Produce their submission. It must concretely satisfy every acceptance criterion. Where criteria ask for tool evidence or screenshots, include the textual equivalent inline (the exact prompts used, the raw first drafts, the refined versions, the settings/metrics visible in the tool). Write in first person, beginner-honest tone, with real specifics. Output exactly two sections separated by the markers ===ARTIFACT=== and ===REASONING=== (the reasoning section answers the reasoning question with specific decisions made during the work).",
+    messages: [
+      {
+        role: "user",
+        content:
+          `Step: ${step.title}\nWhat it covers: ${step.description}\n` +
+          `Acceptance criteria:\n${spec.criteria.map((c) => `- ${c}`).join("\n")}\n` +
+          `Expected tool evidence: ${spec.tool_evidence ?? "none"}\n` +
+          `Reasoning question: ${spec.anti_gaming_prompt}` +
+          (priorFeedback
+            ? `\n\nYour previous submission was graded "refine" with this feedback — fix exactly what it names:\n${priorFeedback}`
+            : ""),
+      },
+    ],
+  });
+  const text = msg.content.find((b) => b.type === "text")?.text ?? "";
+  const [artifactPart, reasoningPart] = text
+    .replace(/^[\s\S]*?===ARTIFACT===/, "")
+    .split("===REASONING===");
+  const artifact = (artifactPart ?? "").trim();
+  const reasoning = (reasoningPart ?? "").trim() || artifact;
+
+  switch (spec.proof_type) {
+    case "attest":
+      return { reflection: `${artifact}\n\n${reasoning}` };
+    case "knowledge":
+      return { shortAnswer: `${artifact}\n\n${reasoning}` };
+    case "work":
+      return { artifact, reasoning };
+    case "skill":
+      return {
+        link: "https://priyasharma.notion.site/glowlab-portfolio-project",
+        artifact,
+        reasoning,
+      };
+  }
+}
+
+console.log("      submitting garbage — must NOT move the metric…");
+const junk = await api(cookies, "POST", "/api/verify-step", {
+  stepIndex: 0,
+  submission: garbageSubmission(spec0),
+});
+check("garbage submission is graded, not accepted", junk.status === 200, JSON.stringify(junk.json));
+check("garbage verdict is refine", junk.json?.verdict === "refine", `got ${junk.json?.verdict}`);
+check("refine returns improvement feedback", (junk.json?.feedback ?? "").length > 20);
+check("job-ready did NOT move", junk.json?.jobReadyPercent === 0, `got ${junk.json?.jobReadyPercent}`);
+
+console.log("      doing the work for real (simulated learner) — refine feedback loops back in…");
+let verify = null;
+let feedbackLoop = null;
+for (let attempt = 1; attempt <= 3; attempt++) {
+  const submission = await simulateLearnerWork(step0, feedbackLoop);
+  if (spec0.quiz) submission.mcqIndex = [1, 0, 2][attempt - 1] ?? 3;
+  verify = await api(cookies, "POST", "/api/verify-step", { stepIndex: 0, submission });
+  if (verify.json?.verdict === "pass") {
+    console.log(`      → pass on attempt ${attempt}`);
+    break;
+  }
+  feedbackLoop = verify.json?.feedback ?? null;
+  console.log(`      → attempt ${attempt} refine (${(feedbackLoop ?? "").slice(0, 80)}…), revising`);
+}
+check("genuine submission passes verification", verify?.json?.verdict === "pass", JSON.stringify(verify?.json));
+check("pass moved job-ready to 20% (1/5)", verify?.json?.jobReadyPercent === 20, `got ${verify?.json?.jobReadyPercent}`);
+check("streak started on verified pass", verify?.json?.progress?.streak === 1);
+check(
+  "grading scored all four dimensions",
+  ["authenticity", "completeness", "correctness", "reasoning"].every(
+    (d) => typeof verify?.json?.scores?.[d] === "number",
+  ),
+);
+
+const dupe = await api(cookies, "POST", "/api/verify-step", {
+  stepIndex: 0,
+  submission: garbageSubmission(spec0),
+});
+check("verified steps can't be re-submitted", dupe.status === 409, `got ${dupe.status}`);
+
 const after = await api(cookies, "GET", "/api/journey");
 check("journey endpoint reports same 20%", after.json?.jobReadyPercent === 20, `got ${after.json?.jobReadyPercent}`);
+check(
+  "verification state recorded on journey",
+  after.json?.verifications?.["0"]?.lastVerdict === "pass" &&
+    typeof after.json?.verifications?.["0"]?.verifiedAt === "string",
+);
 
 // ---- 8. "Log out and back in" — fresh session, everything persists ----
 console.log("\n[8] Fresh sign-in (new session), checking persistence…");
@@ -190,6 +343,10 @@ check("selected role persisted", restored.json?.selectedRoleSlug === chosen.role
 check("toolkit persisted", (restored.json?.toolkit ?? []).length === tools.length);
 check("path persisted", (restored.json?.pathSteps ?? []).length === 5);
 check("progress persisted (20%)", restored.json?.jobReadyPercent === 20);
+check(
+  "verification record persisted",
+  restored.json?.verifications?.["0"]?.lastVerdict === "pass",
+);
 check("resume persisted", restored.json?.hasResume === true);
 
 console.log(

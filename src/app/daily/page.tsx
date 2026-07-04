@@ -5,7 +5,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import StepNav from "@/components/StepNav";
-import { computeJobReadyPercent, type JourneyView, type PathStep, type Progress } from "@/lib/types";
+import StepVerification from "@/components/StepVerification";
+import {
+  computeJobReadyPercent,
+  type JourneyView,
+  type PathStep,
+  type Progress,
+} from "@/lib/types";
 
 export default function DailyPage() {
   const router = useRouter();
@@ -45,18 +51,9 @@ export default function DailyPage() {
   );
   const task = nextIndex >= 0 ? steps[nextIndex] : null;
 
-  async function completeToday() {
-    if (nextIndex < 0) return;
-    const res = await fetch("/api/progress", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stepIndex: nextIndex, completed: true }),
-    });
-    if (res.ok) {
-      const { progress: updated } = await res.json();
-      setJourney((j) => (j ? { ...j, progress: updated } : j));
-      setJustCompleted(true);
-    }
+  function handleVerified(updated: Progress) {
+    setJourney((j) => (j ? { ...j, progress: updated } : j));
+    setJustCompleted(true);
   }
 
   return (
@@ -80,7 +77,7 @@ export default function DailyPage() {
               {readyPercent}%
             </p>
             <p className="mt-1 text-xs uppercase tracking-wide text-charcoal/50 font-semibold">
-              job-ready
+              job-ready · verified
             </p>
           </div>
         </div>
@@ -126,11 +123,12 @@ export default function DailyPage() {
               <div className="text-center">
                 <p className="text-4xl">🎉</p>
                 <h2 className="mt-3 font-heading font-bold text-xl text-indigo">
-                  Step done. Momentum banked.
+                  Step verified. Momentum banked.
                 </h2>
                 <p className="mt-2 text-sm text-charcoal/70">
-                  Your job-ready score just moved. Small steps, every day —
-                  that&apos;s how people actually change careers.
+                  Your job-ready score just moved — on real, verified work.
+                  Small steps, every day — that&apos;s how people actually
+                  change careers.
                 </p>
                 <button
                   onClick={() => setJustCompleted(false)}
@@ -156,15 +154,12 @@ export default function DailyPage() {
                   <p className="mt-2 text-sm leading-relaxed text-charcoal/70">
                     {task.description}
                   </p>
-                  <p className="mt-3 font-accent italic text-sm text-teal">
-                    Unlocks: {task.unlocks}
-                  </p>
-                  <button
-                    onClick={completeToday}
-                    className="mt-6 w-full rounded-full bg-coral hover:bg-coral-dark transition-colors px-6 py-3.5 font-heading font-semibold text-white"
-                  >
-                    Done — count it
-                  </button>
+                  <StepVerification
+                    stepIndex={nextIndex}
+                    step={task}
+                    prior={journey.verifications?.[String(nextIndex)]}
+                    onVerified={handleVerified}
+                  />
                 </>
               )
             )}

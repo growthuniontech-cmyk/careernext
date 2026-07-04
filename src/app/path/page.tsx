@@ -5,7 +5,14 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import StepNav from "@/components/StepNav";
 import LoadingCard from "@/components/LoadingCard";
-import { computeJobReadyPercent, type JourneyView, type PathStep } from "@/lib/types";
+import StepVerification from "@/components/StepVerification";
+import {
+  computeJobReadyPercent,
+  type JourneyView,
+  type PathStep,
+  type Progress,
+  type StepVerificationState,
+} from "@/lib/types";
 
 const LOADING_MESSAGES = [
   "Sequencing your learning path…",
@@ -13,11 +20,22 @@ const LOADING_MESSAGES = [
   "Ending with proof employers can see…",
 ];
 
+const TIER_CHIPS: Record<string, string> = {
+  attest: "Reflect",
+  knowledge: "Knowledge check",
+  work: "Deliverable",
+  skill: "Portfolio",
+};
+
 export default function PathPage() {
   const router = useRouter();
   const [title, setTitle] = useState<string | null>(null);
   const [steps, setSteps] = useState<PathStep[] | null>(null);
   const [completed, setCompleted] = useState<number[]>([]);
+  const [verifications, setVerifications] = useState<
+    Record<string, StepVerificationState>
+  >({});
+  const [openStep, setOpenStep] = useState<number | null>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -34,6 +52,7 @@ export default function PathPage() {
         if (cancelled) return;
         setTitle(journey.selectedTitle ?? journey.selectedRoleSlug);
         setCompleted(journey.progress?.completedSteps ?? []);
+        setVerifications(journey.verifications ?? {});
         if (journey.pathSteps?.length) {
           setSteps(journey.pathSteps);
           return;
@@ -57,28 +76,19 @@ export default function PathPage() {
     };
   }, [router]);
 
-  async function toggleStep(index: number) {
-    const isDone = completed.includes(index);
-    // Optimistic update; server is the source of truth on reload
-    setCompleted((prev) =>
-      isDone ? prev.filter((i) => i !== index) : [...prev, index],
-    );
-    const res = await fetch("/api/progress", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stepIndex: index, completed: !isDone }),
-    });
-    if (res.ok) {
-      const { progress } = await res.json();
-      setCompleted(progress.completedSteps);
-    }
-  }
-
   if (!title) return null;
 
   const totalHours = steps?.reduce((sum, s) => sum + s.estimatedHours, 0) ?? 0;
   const weeks = Math.max(1, Math.ceil(totalHours / 3.5)); // ~30 min/day
   const readyPercent = computeJobReadyPercent(completed, steps?.length);
+  const nextIndex = steps
+    ? steps.findIndex((_, i) => !completed.includes(i))
+    : -1;
+
+  function handleVerified(progress: Progress) {
+    setCompleted(progress.completedSteps);
+    setOpenStep(null);
+  }
 
   return (
     <main className="flex-1">
@@ -128,38 +138,44 @@ export default function PathPage() {
                     style={{ width: `${readyPercent}%` }}
                   />
                 </div>
+                <p className="mt-2 text-[11px] text-white/50">
+                  Moves only on verified work — never on a checkbox.
+                </p>
               </div>
             </div>
 
             <ol className="mt-10 space-y-4">
               {steps.map((step, i) => {
                 const done = completed.includes(i);
+                const isNext = i === nextIndex;
+                const locked = !done && !isNext;
                 return (
                   <li
                     key={step.title}
                     className={`rounded-2xl bg-white border shadow-sm p-6 ${
-                      done ? "border-teal/50 bg-teal-soft/40" : "border-charcoal/5"
+                      done
+                        ? "border-teal/50 bg-teal-soft/40"
+                        : locked
+                          ? "border-charcoal/5 opacity-60"
+                          : "border-charcoal/5"
                     }`}
                   >
                     <div className="flex items-start gap-4">
-                      <button
-                        onClick={() => toggleStep(i)}
-                        aria-label={`Mark step ${i + 1} ${done ? "incomplete" : "complete"}`}
-                        className={`mt-0.5 h-8 w-8 shrink-0 rounded-full font-heading font-bold text-sm flex items-center justify-center transition-colors ${
+                      <span
+                        aria-hidden
+                        className={`mt-0.5 h-8 w-8 shrink-0 rounded-full font-heading font-bold text-sm flex items-center justify-center ${
                           done
                             ? "bg-teal text-white"
-                            : "bg-cream border border-charcoal/20 text-charcoal/60 hover:border-teal"
+                            : "bg-cream border border-charcoal/20 text-charcoal/60"
                         }`}
                       >
-                        {done ? "✓" : i + 1}
-                      </button>
+                        {done ? "✓" : locked ? "🔒" : i + 1}
+                      </span>
                       <div className="flex-1">
                         <div className="flex items-baseline justify-between gap-3">
                           <h3
                             className={`font-heading font-semibold ${
-                              done
-                                ? "text-teal line-through decoration-2"
-                                : "text-indigo"
+                              done ? "text-teal" : "text-indigo"
                             }`}
                           >
                             {step.title}
@@ -171,9 +187,38 @@ export default function PathPage() {
                         <p className="mt-1.5 text-sm text-charcoal/70">
                           {step.description}
                         </p>
-                        <p className="mt-2 font-accent italic text-sm text-teal">
-                          Unlocks: {step.unlocks}
-                        </p>
+                        <div className="mt-2 flex items-center gap-2">
+                          <span className="rounded-full bg-teal-soft text-teal text-[11px] font-semibold px-2.5 py-0.5">
+                            {TIER_CHIPS[step.deliverable.proof_type]}
+                          </span>
+                          {done && (
+                            <span className="text-xs text-teal font-accent italic">
+                              Verified ✓
+                            </span>
+                          )}
+                          {locked && (
+                            <span className="text-xs text-charcoal/40">
+                              Unlocks after step {i}
+                            </span>
+                          )}
+                        </div>
+
+                        {isNext && openStep !== i && (
+                          <button
+                            onClick={() => setOpenStep(i)}
+                            className="mt-3 rounded-full bg-indigo hover:bg-indigo-light transition-colors px-5 py-2 text-sm font-semibold text-white"
+                          >
+                            Verify &amp; complete this step
+                          </button>
+                        )}
+                        {isNext && openStep === i && (
+                          <StepVerification
+                            stepIndex={i}
+                            step={step}
+                            prior={verifications[String(i)]}
+                            onVerified={handleVerified}
+                          />
+                        )}
                       </div>
                     </div>
                   </li>

@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "node scripts/seed-supabase.mjs",
+    "test:verification": "npx -y tsx scripts/test-verification.ts",
+    "test:grading": "npx -y tsx scripts/test-grading.ts",
     "sync:notion": "node scripts/sync-notion-tools.mjs"
   },
   "dependencies": {

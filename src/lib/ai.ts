@@ -3,6 +3,9 @@ import { z } from "zod";
 
 export const MODEL = "claude-opus-4-8";
 
+// Rubric/spec generation is offline + cached per role — use the strongest model.
+export const RUBRIC_MODEL = "claude-opus-4-8";
+
 export function isClaudeConfigured(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
@@ -70,6 +73,68 @@ export const ToolkitSchema = z.object({
       }),
     )
     .describe("6-8 tools total: 3-4 high tier, 3-4 medium tier"),
+});
+
+/** Per-step deliverable spec fields generated from step data. proof_type and
+ *  pass_threshold are NOT generated — the deterministic classifier assigns
+ *  those (src/lib/verification.ts). */
+export const SpecsSchema = z.object({
+  specs: z
+    .array(
+      z.object({
+        criteria: z
+          .array(z.string())
+          .describe(
+            "2-4 acceptance criteria — concrete things a passing submission must contain or demonstrate",
+          ),
+        tool_evidence: z
+          .string()
+          .nullable()
+          .describe(
+            'Specific tool output that would evidence real work, e.g. "Ahrefs/Semrush screenshot" — null if no tool evidence applies',
+          ),
+        anti_gaming_prompt: z
+          .string()
+          .describe(
+            'A "why did you do it this way" reasoning question that is hard to answer without having done the work',
+          ),
+        quiz: z.object({
+          scenario: z
+            .string()
+            .describe(
+              "A realistic on-the-job scenario question testing this step's concept",
+            ),
+          options: z
+            .array(z.string())
+            .describe("Exactly 4 answer options, one clearly best"),
+          correctIndex: z
+            .number()
+            .describe("0-based index of the best option"),
+        }),
+      }),
+    )
+    .describe("One spec per step, in the same order as the steps given"),
+});
+
+/** Runtime grading: four universal dimensions, each 0-1, plus feedback. */
+export const GradeSchema = z.object({
+  authenticity: z
+    .number()
+    .describe("0-1: is this plausibly real work by this person, not fabricated or generic filler?"),
+  completeness: z
+    .number()
+    .describe("0-1: how fully does the submission cover the acceptance criteria?"),
+  correctness: z
+    .number()
+    .describe("0-1: is the work/answer actually right for this step?"),
+  reasoning: z
+    .number()
+    .describe("0-1: does their reasoning show they understand WHY, not just what?"),
+  feedback: z
+    .string()
+    .describe(
+      "2-4 sentences of specific, actionable improvement feedback tied to the criteria — the feedback is the value, not just the gate",
+    ),
 });
 
 export const PathSchema = z.object({

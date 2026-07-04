@@ -78,6 +78,6 @@ export const config = {
     "/api/toolkit",
     "/api/learning-path",
     "/api/journey",
-    "/api/progress",
+    "/api/verify-step",
   ],
 };

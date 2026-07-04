@@ -33,7 +33,10 @@ create table if not exists public.ai_tools (
 -- Learning paths generated once per role via Claude, then reused.
 create table if not exists public.role_paths (
   role_slug text primary key,
-  steps jsonb not null, -- [{title, description, estimatedHours, unlocks}] x5
+  -- [{title, description, estimatedHours, deliverable: {proof_type, criteria[],
+  --   pass_threshold, tool_evidence, anti_gaming_prompt, quiz?, review}}] x5
+  -- (legacy rows carry a free-text `unlocks`; migrated on next path fetch)
+  steps jsonb not null,
   created_at timestamptz not null default now()
 );
 

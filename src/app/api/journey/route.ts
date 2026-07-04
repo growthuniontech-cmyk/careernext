@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { requireUser, getJourney, saveJourney, getLatestResume } from "@/lib/journey";
 import { loadRole } from "@/lib/roles";
+import { sanitizeStepsForClient, stepsHaveSpecs } from "@/lib/verification";
 import { computeJobReadyPercent, type JourneyView, type PathStep } from "@/lib/types";
 
 /** GET: everything the flow pages need in one call. */
@@ -21,7 +22,10 @@ export async function GET() {
       .select("steps")
       .eq("role_slug", journey.selectedRoleSlug)
       .maybeSingle();
-    pathSteps = (data?.steps as PathStep[]) ?? undefined;
+    const raw = (data?.steps as PathStep[]) ?? undefined;
+    // Legacy rows without specs are treated as absent — the path page then
+    // calls /api/learning-path, which migrates and re-caches them.
+    pathSteps = raw && stepsHaveSpecs(raw) ? sanitizeStepsForClient(raw) : undefined;
   }
 
   const view: JourneyView = {
@@ -59,8 +63,8 @@ export async function PATCH(request: Request) {
   await saveJourney(supabase, auth.user.id, {
     selectedRoleSlug,
     selectedTitle: role.title,
-    // Changing roles resets downstream results and progress
-    ...(changed ? { toolkit: undefined, progress: undefined } : {}),
+    // Changing roles resets downstream results, progress, and verifications
+    ...(changed ? { toolkit: undefined, progress: undefined, verifications: undefined } : {}),
   });
 
   return Response.json({ ok: true });

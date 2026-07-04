@@ -33,11 +33,61 @@ export type ToolkitTool = {
   url?: string;
 };
 
+export type ProofType = "attest" | "knowledge" | "work" | "skill";
+
+/** Scenario MCQ attached to knowledge-tier specs. correctIndex is stripped
+ *  before steps are sent to the client — only the server grades it. */
+export type SpecQuiz = {
+  scenario: string;
+  options: string[];
+  correctIndex?: number;
+};
+
+/** Structured deliverable spec — generated once per canonical step and cached
+ *  in role_paths. Replaces the old free-text "unlocks" string. */
+export type DeliverableSpec = {
+  proof_type: ProofType;
+  criteria: string[];
+  pass_threshold: number; // 0-1, set by tier: attest/knowledge soft, work hard, skill absolute
+  tool_evidence: string | null;
+  anti_gaming_prompt: string;
+  quiz?: SpecQuiz; // knowledge steps only
+  review: "pending" | "approved"; // human-approval flag for generated specs
+};
+
 export type PathStep = {
   title: string;
   description: string;
   estimatedHours: number;
-  unlocks: string;
+  deliverable: DeliverableSpec;
+  /** @deprecated legacy display string kept in cached rows so not-yet-updated
+   *  clients keep rendering; new code reads `deliverable`. */
+  unlocks?: string;
+};
+
+/** What a user submits to verify a step; fields vary by proof_type. */
+export type StepSubmission = {
+  reflection?: string; // attest
+  mcqIndex?: number; // knowledge
+  shortAnswer?: string; // knowledge
+  artifact?: string; // work — pasted artifact text
+  link?: string; // work (optional) / skill (required live link)
+  reasoning?: string; // work + skill — answer to anti_gaming_prompt
+};
+
+export type GradeScores = {
+  authenticity: number;
+  completeness: number;
+  correctness: number;
+  reasoning: number;
+};
+
+export type StepVerificationState = {
+  attempts: number;
+  lastVerdict: "pass" | "refine";
+  lastFeedback: string;
+  scores: GradeScores;
+  verifiedAt?: string; // ISO timestamp, set on pass
 };
 
 export type Progress = {
@@ -53,6 +103,8 @@ export type JourneyData = {
   selectedTitle?: string;
   toolkit?: ToolkitTool[];
   progress?: Progress;
+  /** Per-step verification state, keyed by String(stepIndex). */
+  verifications?: Record<string, StepVerificationState>;
 };
 
 /** Everything a flow page needs, served by GET /api/journey. */

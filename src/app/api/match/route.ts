@@ -25,7 +25,7 @@ export async function POST() {
   const ranked = rankRoles(resume, roles, 5);
 
   // Personalized reasoning via Claude — one call for all five
-  let reasons = new Map<string, string>();
+  const reasons = new Map<string, string>();
   if (isClaudeConfigured()) {
     try {
       const response = await getClaude().messages.parse({

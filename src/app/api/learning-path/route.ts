@@ -3,9 +3,11 @@ import { getClaude, MODEL, isClaudeConfigured, PathSchema } from "@/lib/ai";
 import { createClient, createAdminClient, hasServiceRole } from "@/lib/supabase/server";
 import { requireUser, getJourney } from "@/lib/journey";
 import { loadRole } from "@/lib/roles";
+import { generateDeliverables } from "@/lib/specs";
+import { sanitizeStepsForClient, stepsHaveSpecs } from "@/lib/verification";
 import type { PathStep } from "@/lib/types";
 
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 const SYSTEM = `You design 5-step learning paths that take someone from their current skills to job-ready for a target role. Rules:
 - Exactly 5 steps, sequenced so early wins come first and each step builds on the last.
@@ -13,8 +15,20 @@ const SYSTEM = `You design 5-step learning paths that take someone from their cu
 - Steps teach the modern, AI-augmented version of the role.
 - Tone: encouraging and concrete. "unlocks" lines are real milestones, not fluff.`;
 
-/** Paths are generated once per role and cached in role_paths — every user
- *  targeting the same role shares the path; progress is per-user. */
+function cacheSteps(roleSlug: string, steps: PathStep[]) {
+  if (!hasServiceRole()) return;
+  const admin = createAdminClient();
+  return admin
+    .from("role_paths")
+    .upsert({ role_slug: roleSlug, steps }, { onConflict: "role_slug" })
+    .then(({ error }) => {
+      if (error) console.error("role_paths upsert failed:", error);
+    });
+}
+
+/** Paths + their verification specs are generated once per role and cached in
+ *  role_paths — every user targeting the same role shares them; progress and
+ *  verification state are per-user. */
 export async function POST() {
   const supabase = await createClient();
   const auth = await requireUser(supabase);
@@ -36,7 +50,14 @@ export async function POST() {
     .eq("role_slug", role.slug)
     .maybeSingle();
   if (cached?.steps) {
-    return Response.json({ steps: cached.steps as PathStep[], cached: true });
+    const cachedSteps = cached.steps as PathStep[];
+    if (stepsHaveSpecs(cachedSteps)) {
+      return Response.json({ steps: sanitizeStepsForClient(cachedSteps), cached: true });
+    }
+    // Legacy row (pre-verification schema): generate specs once, re-cache.
+    const migrated = await generateDeliverables(role.title, cachedSteps);
+    await cacheSteps(role.slug, migrated);
+    return Response.json({ steps: sanitizeStepsForClient(migrated), cached: true });
   }
 
   if (!isClaudeConfigured()) {
@@ -60,21 +81,16 @@ export async function POST() {
       ],
     });
 
-    const steps = (response.parsed_output?.steps ?? []).slice(0, 5) as PathStep[];
-    if (steps.length < 3) {
+    const rawSteps = (response.parsed_output?.steps ?? []).slice(0, 5);
+    if (rawSteps.length < 3) {
       return Response.json({ error: "path_failed" }, { status: 500 });
     }
 
-    // Persist for reuse across all users targeting this role
-    if (hasServiceRole()) {
-      const admin = createAdminClient();
-      const { error } = await admin
-        .from("role_paths")
-        .upsert({ role_slug: role.slug, steps }, { onConflict: "role_slug" });
-      if (error) console.error("role_paths upsert failed:", error);
-    }
+    // Attach generated verification specs, then persist for reuse across users
+    const steps = await generateDeliverables(role.title, rawSteps);
+    await cacheSteps(role.slug, steps);
 
-    return Response.json({ steps, cached: false });
+    return Response.json({ steps: sanitizeStepsForClient(steps), cached: false });
   } catch (err) {
     console.error("learning-path generation failed:", err);
     return Response.json({ error: "path_failed" }, { status: 500 });
