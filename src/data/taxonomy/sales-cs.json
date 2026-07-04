@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "sales-development-representative",
+    "title": "Sales Development Representative",
+    "category": "Sales & Customer Success",
+    "description": "Opens doors — researches prospects, writes outreach, and books qualified meetings.",
+    "skills": ["prospecting", "cold outreach", "email writing", "CRM", "qualification", "objection handling", "research", "call scripts", "persistence"],
+    "tools": ["ChatGPT", "Claude", "Apollo", "Clay", "Lavender", "Outreach"],
+    "keywords": ["sdr", "bdr", "business development representative", "inside sales", "lead generation"]
+  },
+  {
+    "slug": "account-executive",
+    "title": "Account Executive",
+    "category": "Sales & Customer Success",
+    "description": "Runs the full sales cycle — discovery, demos, negotiation, and close.",
+    "skills": ["discovery calls", "demos", "negotiation", "pipeline management", "CRM", "forecasting", "objection handling", "closing", "relationship building"],
+    "tools": ["Gong", "ChatGPT", "Claude", "Salesforce Einstein", "Apollo", "Fathom"],
+    "keywords": ["ae", "sales executive", "sales representative", "closer", "field sales"]
+  },
+  {
+    "slug": "account-manager",
+    "title": "Account Manager",
+    "category": "Sales & Customer Success",
+    "description": "Grows existing customer accounts through renewals, upsells, and trust.",
+    "skills": ["relationship management", "renewals", "upselling", "CRM", "account planning", "communication", "negotiation", "reporting"],
+    "tools": ["ChatGPT", "Claude", "Gong", "Salesforce Einstein", "Notion AI", "Fathom"],
+    "keywords": ["key account manager", "client manager", "relationship manager", "portfolio manager"]
+  },
+  {
+    "slug": "sales-operations-analyst",
+    "title": "Sales Operations Analyst",
+    "category": "Sales & Customer Success",
+    "description": "Keeps the sales machine running — CRM hygiene, territories, quotas, and reporting.",
+    "skills": ["Salesforce", "reporting", "Excel", "process design", "forecasting", "data hygiene", "dashboards", "commission tracking"],
+    "tools": ["ChatGPT", "Claude", "Salesforce Einstein", "Tableau", "Zapier", "Clari"],
+    "keywords": ["sales ops", "revenue operations", "revops analyst", "crm administrator", "salesforce admin"]
+  },
+  {
+    "slug": "sales-enablement-specialist",
+    "title": "Sales Enablement Specialist",
+    "category": "Sales & Customer Success",
+    "description": "Arms sellers with the training, content, and playbooks they need to win.",
+    "skills": ["training design", "playbook writing", "content creation", "onboarding", "CRM", "presentation", "coaching", "measurement"],
+    "tools": ["Claude", "ChatGPT", "Gong", "Highspot", "Notion AI", "Loom AI"],
+    "keywords": ["enablement manager", "revenue enablement", "sales trainer"]
+  },
+  {
+    "slug": "customer-success-manager",
+    "title": "Customer Success Manager",
+    "category": "Sales & Customer Success",
+    "description": "Makes sure customers reach their goals so they renew and expand.",
+    "skills": ["onboarding", "relationship management", "product knowledge", "renewals", "health scoring", "QBRs", "communication", "escalation handling"],
+    "tools": ["ChatGPT", "Claude", "Gainsight", "Fathom", "Notion AI", "Intercom Fin"],
+    "keywords": ["csm", "client success", "customer success specialist", "account success"]
+  },
+  {
+    "slug": "customer-support-specialist",
+    "title": "Customer Support Specialist",
+    "category": "Sales & Customer Success",
+    "description": "Resolves customer questions and issues across chat, email, and phone.",
+    "skills": ["written communication", "troubleshooting", "empathy", "ticketing systems", "product knowledge", "de-escalation", "documentation", "multitasking"],
+    "tools": ["Intercom Fin", "Zendesk AI", "ChatGPT", "Claude", "Notion AI", "Loom AI"],
+    "keywords": ["customer service representative", "support agent", "helpdesk", "customer care"]
+  },
+  {
+    "slug": "solutions-consultant",
+    "title": "Solutions Consultant",
+    "category": "Sales & Customer Success",
+    "description": "The technical side of the sales team — demos, POCs, and solution design.",
+    "skills": ["demos", "solution design", "technical discovery", "presentation", "APIs basics", "proposal writing", "objection handling", "product depth"],
+    "tools": ["Claude", "ChatGPT", "Gong", "Loom AI", "Notion AI", "Miro"],
+    "keywords": ["presales consultant", "sales engineer", "solution engineer", "technical consultant"]
+  },
+  {
+    "slug": "partnerships-manager",
+    "title": "Partnerships Manager",
+    "category": "Sales & Customer Success",
+    "description": "Builds and manages the alliances and channel deals that expand distribution.",
+    "skills": ["partner recruitment", "negotiation", "relationship management", "co-marketing", "pipeline tracking", "contracts basics", "communication", "strategy"],
+    "tools": ["ChatGPT", "Claude", "Crossbeam", "Notion AI", "Apollo", "HubSpot AI"],
+    "keywords": ["business development manager", "alliances manager", "channel manager", "strategic partnerships"]
+  },
+  {
+    "slug": "revenue-operations-analyst",
+    "title": "Revenue Operations Analyst",
+    "category": "Sales & Customer Success",
+    "description": "Unifies sales, marketing, and CS data into one revenue engine.",
+    "skills": ["CRM administration", "SQL basics", "reporting", "funnel analysis", "process automation", "forecasting", "data hygiene", "cross-team communication"],
+    "tools": ["ChatGPT", "Claude", "Salesforce Einstein", "Zapier", "Tableau", "Clay"],
+    "keywords": ["revops", "gtm operations", "growth operations", "business operations"]
+  },
+  {
+    "slug": "customer-experience-manager",
+    "title": "Customer Experience Manager",
+    "category": "Sales & Customer Success",
+    "description": "Owns the end-to-end customer journey and the metrics that track it.",
+    "skills": ["journey mapping", "NPS programs", "process improvement", "analytics", "voice of customer", "cross-functional leadership", "communication"],
+    "tools": ["ChatGPT", "Claude", "Qualtrics", "Intercom Fin", "Notion AI", "Dovetail"],
+    "keywords": ["cx manager", "customer experience lead", "voice of customer"]
+  }
+]

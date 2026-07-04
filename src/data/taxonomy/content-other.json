@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "content-writer",
+    "title": "Content Writer",
+    "category": "Content & Media",
+    "description": "Writes articles, guides, and web copy that inform and rank.",
+    "skills": ["writing", "research", "SEO", "editing", "interviewing", "CMS", "deadlines", "adaptability of tone"],
+    "tools": ["Claude", "ChatGPT", "Grammarly", "Surfer SEO", "Perplexity", "Hemingway"],
+    "keywords": ["blog writer", "article writer", "web content writer", "freelance writer", "seo writer"]
+  },
+  {
+    "slug": "technical-writer",
+    "title": "Technical Writer",
+    "category": "Content & Media",
+    "description": "Turns complex products into clear docs, guides, and API references.",
+    "skills": ["technical writing", "documentation tools", "information architecture", "API documentation", "editing", "interviewing engineers", "markdown", "version control basics"],
+    "tools": ["Claude", "ChatGPT", "Mintlify", "Notion AI", "GitBook", "Grammarly"],
+    "keywords": ["documentation specialist", "technical author", "api writer", "docs engineer"]
+  },
+  {
+    "slug": "video-editor",
+    "title": "Video Editor",
+    "category": "Content & Media",
+    "description": "Cuts raw footage into polished videos for brands, creators, and campaigns.",
+    "skills": ["video editing", "Premiere Pro", "storytelling", "color grading", "sound design", "motion graphics basics", "pacing", "formats and codecs"],
+    "tools": ["Descript", "CapCut", "Runway", "Adobe Premiere", "Opus Clip", "ElevenLabs"],
+    "keywords": ["film editor", "content editor", "youtube editor", "post production"]
+  },
+  {
+    "slug": "podcast-producer",
+    "title": "Podcast Producer",
+    "category": "Content & Media",
+    "description": "Plans, records, edits, and distributes podcast episodes end to end.",
+    "skills": ["audio editing", "show planning", "guest booking", "interviewing", "distribution", "show notes", "audience growth", "sound quality"],
+    "tools": ["Descript", "Riverside", "ChatGPT", "Claude", "ElevenLabs", "Opus Clip"],
+    "keywords": ["audio producer", "podcast editor", "podcast manager"]
+  },
+  {
+    "slug": "editor",
+    "title": "Editor",
+    "category": "Content & Media",
+    "description": "Shapes other people's writing — structure, clarity, accuracy, and voice.",
+    "skills": ["editing", "proofreading", "style guides", "fact-checking", "feedback", "content planning", "headline writing", "CMS"],
+    "tools": ["Claude", "ChatGPT", "Grammarly", "Hemingway", "Notion AI", "Perplexity"],
+    "keywords": ["copy editor", "managing editor", "content editor", "sub editor"]
+  },
+  {
+    "slug": "scriptwriter",
+    "title": "Scriptwriter",
+    "category": "Content & Media",
+    "description": "Writes scripts for video, ads, explainers, and short-form content.",
+    "skills": ["scriptwriting", "storytelling", "hooks", "pacing", "research", "brand voice", "collaboration", "revision"],
+    "tools": ["Claude", "ChatGPT", "Descript", "Notion AI", "Perplexity", "Grammarly"],
+    "keywords": ["video script writer", "screenwriter", "youtube scriptwriter", "ugc scriptwriter"]
+  },
+  {
+    "slug": "social-video-creator",
+    "title": "Social Video Creator",
+    "category": "Content & Media",
+    "description": "Makes short-form video that stops the scroll on TikTok, Reels, and Shorts.",
+    "skills": ["short-form video", "hooks", "editing", "trends", "on-camera presence", "captioning", "analytics", "posting cadence"],
+    "tools": ["CapCut", "Opus Clip", "ChatGPT", "Descript", "Canva Magic Studio", "Submagic"],
+    "keywords": ["short form video editor", "tiktok creator", "reels creator", "ugc creator", "content creator"]
+  },
+  {
+    "slug": "journalist",
+    "title": "Journalist",
+    "category": "Content & Media",
+    "description": "Reports, verifies, and writes news and feature stories.",
+    "skills": ["reporting", "interviewing", "fact-checking", "writing", "research", "deadlines", "ethics", "source building"],
+    "tools": ["Perplexity", "Claude", "ChatGPT", "Otter", "Grammarly", "Pinpoint"],
+    "keywords": ["reporter", "news writer", "correspondent", "feature writer"]
+  },
+  {
+    "slug": "instructional-designer",
+    "title": "Instructional Designer",
+    "category": "Education & Professional Services",
+    "description": "Designs courses and learning experiences that actually teach.",
+    "skills": ["curriculum design", "learning theory", "e-learning tools", "storyboarding", "assessment design", "video basics", "LMS", "stakeholder communication"],
+    "tools": ["ChatGPT", "Claude", "Articulate", "Synthesia", "Canva Magic Studio", "7taps"],
+    "keywords": ["learning experience designer", "curriculum developer", "course designer", "elearning developer"]
+  },
+  {
+    "slug": "corporate-trainer",
+    "title": "Corporate Trainer",
+    "category": "Education & Professional Services",
+    "description": "Delivers live and virtual training that changes how people work.",
+    "skills": ["facilitation", "presentation", "training design", "coaching", "needs assessment", "engagement techniques", "measurement", "communication"],
+    "tools": ["ChatGPT", "Claude", "Canva Magic Studio", "Mentimeter", "Synthesia", "Kahoot"],
+    "keywords": ["trainer", "facilitator", "training consultant", "enablement trainer"]
+  },
+  {
+    "slug": "paralegal",
+    "title": "Paralegal",
+    "category": "Education & Professional Services",
+    "description": "Supports attorneys with research, drafting, and case management.",
+    "skills": ["legal research", "document drafting", "case management", "e-discovery", "citation", "confidentiality", "organization", "deadlines"],
+    "tools": ["ChatGPT", "Claude", "Spellbook", "Clio", "Westlaw", "Relativity"],
+    "keywords": ["legal assistant", "litigation paralegal", "corporate paralegal", "legal secretary"]
+  },
+  {
+    "slug": "legal-operations-specialist",
+    "title": "Legal Operations Specialist",
+    "category": "Education & Professional Services",
+    "description": "Brings process, tooling, and metrics to in-house legal teams.",
+    "skills": ["contract lifecycle management", "process design", "vendor management", "reporting", "legal tech", "budgeting", "project management"],
+    "tools": ["ChatGPT", "Claude", "Ironclad", "Spellbook", "Zapier", "Notion AI"],
+    "keywords": ["legal ops", "contracts manager", "legal project manager"]
+  },
+  {
+    "slug": "compliance-analyst",
+    "title": "Compliance Analyst",
+    "category": "Education & Professional Services",
+    "description": "Monitors policies and regulations to keep the company on the right side of the rules.",
+    "skills": ["regulatory research", "policy writing", "risk assessment", "auditing", "documentation", "training delivery", "attention to detail", "reporting"],
+    "tools": ["ChatGPT", "Claude", "Perplexity", "Vanta", "LogicGate", "Excel Copilot"],
+    "keywords": ["compliance officer", "regulatory analyst", "risk and compliance", "grc analyst"]
+  },
+  {
+    "slug": "healthcare-administrator",
+    "title": "Healthcare Administrator",
+    "category": "Education & Professional Services",
+    "description": "Manages the business side of clinics and health services — scheduling, billing, compliance.",
+    "skills": ["scheduling", "medical billing basics", "EHR systems", "compliance", "patient communication", "staff coordination", "reporting", "confidentiality"],
+    "tools": ["ChatGPT", "Claude", "Epic", "Zocdoc", "Excel Copilot", "Notion AI"],
+    "keywords": ["practice manager", "medical office manager", "health services manager", "clinic administrator"]
+  },
+  {
+    "slug": "research-analyst",
+    "title": "Research Analyst",
+    "category": "Education & Professional Services",
+    "description": "Gathers and synthesizes market, industry, or policy research into briefs and reports.",
+    "skills": ["research methods", "synthesis", "report writing", "data analysis", "Excel", "surveys", "presentation", "critical thinking"],
+    "tools": ["Perplexity", "Claude", "ChatGPT", "AlphaSense", "Elicit", "Notion AI"],
+    "keywords": ["market research analyst", "insights analyst", "policy analyst", "intelligence analyst"]
+  },
+  {
+    "slug": "virtual-assistant",
+    "title": "Virtual Assistant",
+    "category": "Education & Professional Services",
+    "description": "Provides remote administrative, scheduling, and operational support to founders and teams.",
+    "skills": ["calendar management", "email management", "data entry", "research", "social media basics", "invoicing", "communication", "reliability"],
+    "tools": ["ChatGPT", "Claude", "Notion AI", "Zapier", "Canva Magic Studio", "Calendly"],
+    "keywords": ["va", "remote assistant", "administrative support", "online business manager"]
+  }
+]

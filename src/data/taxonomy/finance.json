@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "financial-analyst",
+    "title": "Financial Analyst",
+    "category": "Finance",
+    "description": "Builds models and analysis that guide budgeting, forecasting, and investment calls.",
+    "skills": ["financial modeling", "Excel", "forecasting", "variance analysis", "PowerPoint", "SQL basics", "accounting basics", "presentation"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "Power BI", "Mosaic", "Datarails"],
+    "keywords": ["finance analyst", "corporate finance", "budget analyst", "financial planning"]
+  },
+  {
+    "slug": "fpa-analyst",
+    "title": "FP&A Analyst",
+    "category": "Finance",
+    "description": "Owns budgets, forecasts, and the monthly story behind the numbers.",
+    "skills": ["budgeting", "forecasting", "financial modeling", "Excel", "variance analysis", "dashboards", "business partnering", "ERP systems"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "Anaplan", "Mosaic", "Power BI"],
+    "keywords": ["financial planning and analysis", "fp&a", "corporate fp&a", "planning analyst"]
+  },
+  {
+    "slug": "accountant",
+    "title": "Accountant",
+    "category": "Finance",
+    "description": "Maintains accurate books — journal entries, reconciliations, and financial statements.",
+    "skills": ["general ledger", "reconciliations", "GAAP", "month-end close", "Excel", "accounts payable", "accounts receivable", "ERP systems"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "QuickBooks", "Xero", "FloQast"],
+    "keywords": ["staff accountant", "general accountant", "senior accountant", "accounting associate"]
+  },
+  {
+    "slug": "bookkeeper",
+    "title": "Bookkeeper",
+    "category": "Finance",
+    "description": "Records daily transactions and keeps small-business finances current and clean.",
+    "skills": ["data entry", "reconciliations", "invoicing", "QuickBooks", "payroll basics", "Excel", "attention to detail", "reporting"],
+    "tools": ["QuickBooks", "Xero", "ChatGPT", "Claude", "Dext", "Excel Copilot"],
+    "keywords": ["bookkeeping", "accounts assistant", "accounting clerk", "finance assistant"]
+  },
+  {
+    "slug": "auditor",
+    "title": "Auditor",
+    "category": "Finance",
+    "description": "Tests financial records and controls for accuracy and compliance.",
+    "skills": ["audit procedures", "internal controls", "GAAP", "risk assessment", "documentation", "Excel", "sampling", "client communication"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "MindBridge", "CaseWare", "AuditBoard"],
+    "keywords": ["internal auditor", "external auditor", "audit associate", "assurance"]
+  },
+  {
+    "slug": "payroll-specialist",
+    "title": "Payroll Specialist",
+    "category": "Finance",
+    "description": "Runs accurate, on-time payroll and handles tax filings and benefits deductions.",
+    "skills": ["payroll processing", "tax compliance", "benefits administration", "Excel", "HRIS systems", "attention to detail", "confidentiality", "reconciliation"],
+    "tools": ["ADP", "Gusto", "ChatGPT", "Claude", "Excel Copilot", "Rippling"],
+    "keywords": ["payroll administrator", "payroll coordinator", "payroll manager"]
+  },
+  {
+    "slug": "credit-analyst",
+    "title": "Credit Analyst",
+    "category": "Finance",
+    "description": "Assesses borrower risk and recommends lending decisions.",
+    "skills": ["credit assessment", "financial statement analysis", "risk modeling", "Excel", "report writing", "regulatory knowledge", "attention to detail"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "Moody's Analytics", "Power BI", "nCino"],
+    "keywords": ["credit risk analyst", "loan analyst", "underwriter", "risk analyst"]
+  },
+  {
+    "slug": "investment-analyst",
+    "title": "Investment Analyst",
+    "category": "Finance",
+    "description": "Researches companies and markets to support investment decisions.",
+    "skills": ["valuation", "financial modeling", "equity research", "Excel", "market analysis", "report writing", "presentation", "accounting"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "AlphaSense", "Perplexity", "Koyfin"],
+    "keywords": ["equity analyst", "research analyst", "portfolio analyst", "buy side analyst"]
+  },
+  {
+    "slug": "tax-associate",
+    "title": "Tax Associate",
+    "category": "Finance",
+    "description": "Prepares returns and researches tax positions for individuals or businesses.",
+    "skills": ["tax preparation", "tax research", "compliance", "Excel", "accounting", "client communication", "attention to detail", "deadlines"],
+    "tools": ["ChatGPT", "Claude", "Excel Copilot", "Blue J", "TurboTax", "Thomson Reuters"],
+    "keywords": ["tax accountant", "tax preparer", "tax analyst", "tax consultant"]
+  },
+  {
+    "slug": "billing-specialist",
+    "title": "Billing Specialist",
+    "category": "Finance",
+    "description": "Generates invoices, resolves disputes, and keeps receivables flowing.",
+    "skills": ["invoicing", "accounts receivable", "reconciliation", "Excel", "customer communication", "ERP systems", "attention to detail", "collections"],
+    "tools": ["QuickBooks", "ChatGPT", "Claude", "Excel Copilot", "Stripe", "Bill.com"],
+    "keywords": ["billing coordinator", "accounts receivable specialist", "invoicing specialist", "collections specialist"]
+  }
+]

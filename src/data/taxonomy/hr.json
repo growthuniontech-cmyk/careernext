@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "hr-generalist",
+    "title": "HR Generalist",
+    "category": "Human Resources",
+    "description": "Handles the full spread of people work — policies, employee relations, and onboarding.",
+    "skills": ["employee relations", "HR policies", "onboarding", "HRIS systems", "compliance", "benefits basics", "communication", "confidentiality"],
+    "tools": ["ChatGPT", "Claude", "BambooHR", "Notion AI", "Rippling", "Canva Magic Studio"],
+    "keywords": ["hr specialist", "hr executive", "people operations generalist", "hr officer"]
+  },
+  {
+    "slug": "recruiter",
+    "title": "Recruiter",
+    "category": "Human Resources",
+    "description": "Sources, screens, and closes candidates across open roles.",
+    "skills": ["sourcing", "screening", "interviewing", "ATS systems", "candidate experience", "offer negotiation", "employer branding", "pipeline management"],
+    "tools": ["LinkedIn Recruiter", "ChatGPT", "Claude", "Ashby", "Gem", "Metaview"],
+    "keywords": ["talent acquisition specialist", "recruitment consultant", "hiring specialist", "corporate recruiter"]
+  },
+  {
+    "slug": "technical-recruiter",
+    "title": "Technical Recruiter",
+    "category": "Human Resources",
+    "description": "Recruits engineers and technical talent — speaking enough tech to screen well.",
+    "skills": ["technical sourcing", "screening", "tech stack literacy", "ATS systems", "boolean search", "candidate experience", "offer negotiation", "market mapping"],
+    "tools": ["LinkedIn Recruiter", "ChatGPT", "Claude", "Gem", "hireEZ", "Metaview"],
+    "keywords": ["tech recruiter", "engineering recruiter", "it recruiter", "technical talent acquisition"]
+  },
+  {
+    "slug": "hr-operations-specialist",
+    "title": "HR Operations Specialist",
+    "category": "Human Resources",
+    "description": "Runs the systems and processes behind HR — data, workflows, and compliance.",
+    "skills": ["HRIS administration", "process design", "data accuracy", "reporting", "compliance", "onboarding workflows", "documentation", "Excel"],
+    "tools": ["ChatGPT", "Claude", "Rippling", "Workday", "Zapier", "Notion AI"],
+    "keywords": ["people operations", "hris analyst", "hr coordinator", "hr administrator"]
+  },
+  {
+    "slug": "learning-development-specialist",
+    "title": "Learning & Development Specialist",
+    "category": "Human Resources",
+    "description": "Designs and delivers the training that levels up employees.",
+    "skills": ["training design", "facilitation", "e-learning tools", "needs analysis", "content creation", "LMS administration", "measurement", "communication"],
+    "tools": ["ChatGPT", "Claude", "Synthesia", "Articulate", "Canva Magic Studio", "7taps"],
+    "keywords": ["l&d specialist", "training specialist", "corporate trainer", "learning designer"]
+  },
+  {
+    "slug": "compensation-analyst",
+    "title": "Compensation Analyst",
+    "category": "Human Resources",
+    "description": "Benchmarks pay, builds salary bands, and models comp decisions.",
+    "skills": ["compensation benchmarking", "Excel", "salary structures", "market data", "equity basics", "analytics", "confidentiality", "presentation"],
+    "tools": ["Excel Copilot", "ChatGPT", "Claude", "Pave", "Radford", "Power BI"],
+    "keywords": ["total rewards analyst", "comp and benefits", "rewards specialist"]
+  },
+  {
+    "slug": "hr-business-partner",
+    "title": "HR Business Partner",
+    "category": "Human Resources",
+    "description": "Partners with leaders on org design, performance, and people strategy.",
+    "skills": ["business partnering", "employee relations", "performance management", "org design", "coaching", "data-driven HR", "change management", "communication"],
+    "tools": ["ChatGPT", "Claude", "Lattice", "Workday", "Notion AI", "CultureAmp"],
+    "keywords": ["hrbp", "people partner", "senior hr partner", "people business partner"]
+  },
+  {
+    "slug": "talent-sourcer",
+    "title": "Talent Sourcer",
+    "category": "Human Resources",
+    "description": "Finds and engages passive candidates before they ever apply.",
+    "skills": ["boolean search", "outreach writing", "market mapping", "ATS systems", "candidate research", "pipeline building", "data tracking", "persistence"],
+    "tools": ["LinkedIn Recruiter", "hireEZ", "ChatGPT", "Claude", "Gem", "Clay"],
+    "keywords": ["sourcing specialist", "talent researcher", "recruitment sourcer"]
+  }
+]

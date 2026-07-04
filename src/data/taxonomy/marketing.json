@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "digital-marketing-specialist",
+    "title": "Digital Marketing Specialist",
+    "category": "Marketing",
+    "description": "Runs multi-channel digital campaigns across search, social, and email.",
+    "skills": ["campaign management", "Google Ads", "social media", "email marketing", "Google Analytics", "copywriting", "A/B testing", "reporting", "SEO basics"],
+    "tools": ["ChatGPT", "Claude", "Canva Magic Studio", "Google Analytics", "HubSpot AI", "Semrush"],
+    "keywords": ["digital marketer", "marketing executive", "online marketing", "marketing coordinator", "marketing specialist"]
+  },
+  {
+    "slug": "content-marketer",
+    "title": "Content Marketer",
+    "category": "Marketing",
+    "description": "Plans and produces content that attracts, educates, and converts an audience.",
+    "skills": ["content strategy", "writing", "editing", "SEO", "content calendars", "analytics", "storytelling", "repurposing", "CMS"],
+    "tools": ["Claude", "ChatGPT", "Surfer SEO", "Jasper", "Grammarly", "Ahrefs"],
+    "keywords": ["content marketing manager", "content strategist", "content specialist", "inbound marketer"]
+  },
+  {
+    "slug": "seo-specialist",
+    "title": "SEO Specialist",
+    "category": "Marketing",
+    "description": "Grows organic search traffic through technical, on-page, and content optimization.",
+    "skills": ["keyword research", "on-page SEO", "technical SEO", "link building", "Google Search Console", "content optimization", "analytics", "competitive analysis"],
+    "tools": ["Ahrefs", "Semrush", "Surfer SEO", "ChatGPT", "Claude", "Screaming Frog"],
+    "keywords": ["seo analyst", "seo manager", "search engine optimization", "organic growth"]
+  },
+  {
+    "slug": "ppc-specialist",
+    "title": "PPC Specialist",
+    "category": "Marketing",
+    "description": "Manages paid search and paid social budgets to hit acquisition targets.",
+    "skills": ["Google Ads", "Meta Ads", "bid management", "ad copywriting", "conversion tracking", "A/B testing", "budget management", "landing pages", "analytics"],
+    "tools": ["ChatGPT", "Claude", "Google Ads", "Optmyzr", "Unbounce", "AdCreative.ai"],
+    "keywords": ["paid media specialist", "sem specialist", "performance marketer", "paid ads manager", "media buyer"]
+  },
+  {
+    "slug": "social-media-manager",
+    "title": "Social Media Manager",
+    "category": "Marketing",
+    "description": "Owns a brand's voice, calendar, and growth across social platforms.",
+    "skills": ["social strategy", "content creation", "community management", "copywriting", "analytics", "video basics", "scheduling", "trend spotting"],
+    "tools": ["Canva Magic Studio", "ChatGPT", "Claude", "Buffer", "Later", "CapCut"],
+    "keywords": ["social media specialist", "social media executive", "social media coordinator", "community manager"]
+  },
+  {
+    "slug": "email-marketing-specialist",
+    "title": "Email Marketing Specialist",
+    "category": "Marketing",
+    "description": "Designs email campaigns and automated flows that nurture and convert subscribers.",
+    "skills": ["email copywriting", "automation flows", "segmentation", "A/B testing", "deliverability", "analytics", "HTML basics", "CRM"],
+    "tools": ["Klaviyo", "Mailchimp", "ChatGPT", "Claude", "HubSpot AI", "Litmus"],
+    "keywords": ["crm marketer", "lifecycle marketer", "email campaign manager", "retention marketer"]
+  },
+  {
+    "slug": "marketing-analyst",
+    "title": "Marketing Analyst",
+    "category": "Marketing",
+    "description": "Measures campaign performance and turns marketing data into budget decisions.",
+    "skills": ["Google Analytics", "SQL", "Excel", "attribution", "dashboards", "A/B testing", "reporting", "data visualization", "statistics basics"],
+    "tools": ["ChatGPT", "Claude", "Looker Studio", "Tableau", "Julius AI", "Supermetrics"],
+    "keywords": ["marketing data analyst", "growth analyst", "digital analyst", "web analyst"]
+  },
+  {
+    "slug": "growth-marketer",
+    "title": "Growth Marketer",
+    "category": "Marketing",
+    "description": "Runs rapid experiments across the funnel to find repeatable growth levers.",
+    "skills": ["experimentation", "funnel analysis", "landing pages", "copywriting", "analytics", "SEO basics", "paid ads basics", "email flows", "product analytics"],
+    "tools": ["ChatGPT", "Claude", "Amplitude", "Webflow", "Zapier", "PostHog"],
+    "keywords": ["growth hacker", "growth manager", "demand generation", "acquisition marketer"]
+  },
+  {
+    "slug": "brand-manager",
+    "title": "Brand Manager",
+    "category": "Marketing",
+    "description": "Shapes how a brand looks, sounds, and shows up across every touchpoint.",
+    "skills": ["brand strategy", "positioning", "campaign planning", "creative briefs", "market research", "stakeholder management", "storytelling", "budget management"],
+    "tools": ["Claude", "ChatGPT", "Canva Magic Studio", "Notion AI", "Brandwatch", "Miro"],
+    "keywords": ["brand strategist", "brand marketing manager", "brand executive"]
+  },
+  {
+    "slug": "product-marketing-manager",
+    "title": "Product Marketing Manager",
+    "category": "Marketing",
+    "description": "Owns positioning, launches, and sales enablement for a product.",
+    "skills": ["positioning", "messaging", "go-to-market", "competitive analysis", "sales enablement", "customer research", "launch planning", "copywriting"],
+    "tools": ["Claude", "ChatGPT", "Notion AI", "Gong", "Klue", "Canva Magic Studio"],
+    "keywords": ["pmm", "go to market manager", "product marketer", "solutions marketing"]
+  },
+  {
+    "slug": "marketing-automation-specialist",
+    "title": "Marketing Automation Specialist",
+    "category": "Marketing",
+    "description": "Builds the automated journeys, scoring, and integrations inside a marketing platform.",
+    "skills": ["marketing automation", "HubSpot", "Marketo", "lead scoring", "segmentation", "CRM integration", "email flows", "reporting", "data hygiene"],
+    "tools": ["HubSpot AI", "Zapier", "Make", "ChatGPT", "Claude", "Marketo"],
+    "keywords": ["marketing operations", "mops", "crm specialist", "hubspot specialist"]
+  },
+  {
+    "slug": "influencer-marketing-manager",
+    "title": "Influencer Marketing Manager",
+    "category": "Marketing",
+    "description": "Finds, negotiates with, and manages creators who promote a brand.",
+    "skills": ["creator outreach", "negotiation", "campaign management", "brief writing", "performance tracking", "social platforms", "budget management", "relationship management"],
+    "tools": ["ChatGPT", "Claude", "Modash", "CreatorIQ", "Notion AI", "Canva Magic Studio"],
+    "keywords": ["influencer relations", "creator partnerships", "partnership marketing"]
+  },
+  {
+    "slug": "ai-content-strategist",
+    "title": "AI Content Strategist",
+    "category": "Marketing",
+    "description": "Designs AI-augmented content systems — one strategist producing what used to take a team.",
+    "skills": ["content strategy", "prompt engineering", "editing", "SEO", "brand voice", "workflow design", "analytics", "repurposing", "quality control"],
+    "tools": ["Claude", "ChatGPT", "Jasper", "Surfer SEO", "Descript", "Perplexity"],
+    "keywords": ["ai content manager", "content operations", "editorial strategist", "content systems"]
+  },
+  {
+    "slug": "copywriter",
+    "title": "Copywriter",
+    "category": "Marketing",
+    "description": "Writes the words that sell — ads, landing pages, emails, and campaigns.",
+    "skills": ["copywriting", "persuasion", "brand voice", "editing", "research", "headlines", "A/B testing", "storytelling"],
+    "tools": ["Claude", "ChatGPT", "Grammarly", "Hemingway", "Jasper", "Notion AI"],
+    "keywords": ["advertising copywriter", "conversion copywriter", "creative writer", "content writer"]
+  },
+  {
+    "slug": "marketing-manager",
+    "title": "Marketing Manager",
+    "category": "Marketing",
+    "description": "Leads marketing plans, budgets, and a small team across channels.",
+    "skills": ["marketing strategy", "campaign management", "team leadership", "budget management", "analytics", "content planning", "stakeholder communication", "agency management"],
+    "tools": ["ChatGPT", "Claude", "HubSpot AI", "Notion AI", "Canva Magic Studio", "Asana"],
+    "keywords": ["marketing lead", "head of marketing", "marketing generalist", "brand marketing"]
+  }
+]

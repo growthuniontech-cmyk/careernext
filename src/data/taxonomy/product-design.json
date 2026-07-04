@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "product-manager",
+    "title": "Product Manager",
+    "category": "Product & Design",
+    "description": "Decides what gets built next by connecting user needs, data, and business goals.",
+    "skills": ["product strategy", "roadmapping", "user research", "prioritization", "stakeholder management", "analytics", "writing specs", "A/B testing", "agile"],
+    "tools": ["ChatGPT", "Claude", "Notion AI", "Linear", "Amplitude", "Dovetail"],
+    "keywords": ["pm", "product owner", "associate product manager", "senior product manager"]
+  },
+  {
+    "slug": "technical-product-manager",
+    "title": "Technical Product Manager",
+    "category": "Product & Design",
+    "description": "Manages platform, API, or infrastructure products where engineering depth matters.",
+    "skills": ["API design", "system understanding", "roadmapping", "prioritization", "SQL", "technical writing", "agile", "stakeholder management"],
+    "tools": ["Claude", "ChatGPT", "Linear", "Notion AI", "Postman", "Miro"],
+    "keywords": ["platform pm", "api product manager", "technical pm", "infrastructure pm"]
+  },
+  {
+    "slug": "product-owner",
+    "title": "Product Owner",
+    "category": "Product & Design",
+    "description": "Owns the backlog and sprint goals for an agile delivery team.",
+    "skills": ["backlog management", "user stories", "agile", "scrum", "acceptance criteria", "stakeholder communication", "prioritization", "sprint planning"],
+    "tools": ["ChatGPT", "Claude", "Jira", "Notion AI", "Confluence", "Miro"],
+    "keywords": ["agile product owner", "scrum product owner", "po"]
+  },
+  {
+    "slug": "ux-designer",
+    "title": "UX Designer",
+    "category": "Product & Design",
+    "description": "Designs how a product works — flows, wireframes, and interaction patterns.",
+    "skills": ["wireframing", "prototyping", "user flows", "usability testing", "Figma", "information architecture", "interaction design", "design systems"],
+    "tools": ["Figma AI", "ChatGPT", "Claude", "Maze", "Miro", "UX Pilot"],
+    "keywords": ["user experience designer", "interaction designer", "experience designer", "ux/ui designer"]
+  },
+  {
+    "slug": "ui-designer",
+    "title": "UI Designer",
+    "category": "Product & Design",
+    "description": "Designs how a product looks — visual systems, components, and polish.",
+    "skills": ["visual design", "Figma", "typography", "color theory", "design systems", "responsive design", "prototyping", "iconography"],
+    "tools": ["Figma AI", "Midjourney", "ChatGPT", "Relume", "Framer AI", "Claude"],
+    "keywords": ["visual designer", "interface designer", "web designer", "digital designer"]
+  },
+  {
+    "slug": "product-designer",
+    "title": "Product Designer",
+    "category": "Product & Design",
+    "description": "Owns design end to end — research, UX flows, and final UI for product features.",
+    "skills": ["Figma", "user research", "prototyping", "visual design", "design systems", "usability testing", "interaction design", "stakeholder communication"],
+    "tools": ["Figma AI", "ChatGPT", "Claude", "Maze", "Dovetail", "Framer AI"],
+    "keywords": ["end to end designer", "senior designer", "digital product designer"]
+  },
+  {
+    "slug": "ux-researcher",
+    "title": "UX Researcher",
+    "category": "Product & Design",
+    "description": "Runs studies and interviews that tell teams what users actually need.",
+    "skills": ["user interviews", "usability testing", "survey design", "synthesis", "research planning", "personas", "data analysis", "presentation"],
+    "tools": ["Dovetail", "Maze", "ChatGPT", "Claude", "Lookback", "Notion AI"],
+    "keywords": ["user researcher", "design researcher", "research ops"]
+  },
+  {
+    "slug": "ux-writer",
+    "title": "UX Writer",
+    "category": "Product & Design",
+    "description": "Writes the microcopy inside products — buttons, errors, onboarding, empty states.",
+    "skills": ["microcopy", "content design", "brand voice", "information hierarchy", "Figma basics", "user testing", "editing", "style guides"],
+    "tools": ["Claude", "ChatGPT", "Figma AI", "Grammarly", "Notion AI", "Writer"],
+    "keywords": ["content designer", "product writer", "content strategist"]
+  },
+  {
+    "slug": "graphic-designer",
+    "title": "Graphic Designer",
+    "category": "Product & Design",
+    "description": "Creates visual assets for brands — social graphics, decks, print, and campaigns.",
+    "skills": ["Adobe Creative Suite", "layout", "typography", "branding", "social media graphics", "print design", "illustration basics", "client communication"],
+    "tools": ["Canva Magic Studio", "Adobe Firefly", "Midjourney", "ChatGPT", "Figma AI", "Remove.bg"],
+    "keywords": ["visual designer", "creative designer", "brand designer", "graphics artist"]
+  },
+  {
+    "slug": "motion-designer",
+    "title": "Motion Designer",
+    "category": "Product & Design",
+    "description": "Animates brand and product stories — explainers, ads, and UI motion.",
+    "skills": ["After Effects", "animation", "storyboarding", "video editing", "typography", "sound sync", "3D basics", "creative direction"],
+    "tools": ["Runway", "Adobe Firefly", "Midjourney", "ChatGPT", "CapCut", "Pika"],
+    "keywords": ["motion graphics designer", "animator", "video designer"]
+  },
+  {
+    "slug": "brand-designer",
+    "title": "Brand Designer",
+    "category": "Product & Design",
+    "description": "Designs identity systems — logos, palettes, type, and guidelines brands live by.",
+    "skills": ["identity design", "logo design", "typography", "brand guidelines", "Adobe Creative Suite", "presentation design", "art direction", "client communication"],
+    "tools": ["Midjourney", "Adobe Firefly", "Figma AI", "ChatGPT", "Canva Magic Studio", "Claude"],
+    "keywords": ["identity designer", "visual identity", "brand identity designer"]
+  }
+]

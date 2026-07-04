@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "frontend-developer",
+    "title": "Frontend Developer",
+    "category": "Software & Data",
+    "description": "Builds the user-facing side of web applications with modern JavaScript frameworks.",
+    "skills": ["JavaScript", "TypeScript", "React", "HTML", "CSS", "responsive design", "REST APIs", "Git", "testing", "accessibility"],
+    "tools": ["GitHub Copilot", "Cursor", "Claude", "ChatGPT", "Vercel v0", "Figma"],
+    "keywords": ["front end developer", "front-end engineer", "react developer", "web developer", "ui developer", "javascript developer"]
+  },
+  {
+    "slug": "backend-developer",
+    "title": "Backend Developer",
+    "category": "Software & Data",
+    "description": "Designs and builds server-side systems, APIs, and data layers that power applications.",
+    "skills": ["Node.js", "Python", "Java", "SQL", "API design", "databases", "authentication", "Git", "system design", "testing"],
+    "tools": ["GitHub Copilot", "Cursor", "Claude", "ChatGPT", "Postman", "Docker"],
+    "keywords": ["back end developer", "back-end engineer", "api developer", "server developer", "software engineer", "node developer", "python developer"]
+  },
+  {
+    "slug": "full-stack-developer",
+    "title": "Full-Stack Developer",
+    "category": "Software & Data",
+    "description": "Ships complete features across frontend, backend, and database layers.",
+    "skills": ["JavaScript", "TypeScript", "React", "Node.js", "SQL", "REST APIs", "Git", "deployment", "testing", "system design"],
+    "tools": ["Cursor", "GitHub Copilot", "Claude", "ChatGPT", "Vercel", "Supabase"],
+    "keywords": ["fullstack developer", "full stack engineer", "web application developer", "software developer", "mern developer"]
+  },
+  {
+    "slug": "mobile-developer",
+    "title": "Mobile Developer",
+    "category": "Software & Data",
+    "description": "Builds iOS and Android apps, natively or with cross-platform frameworks.",
+    "skills": ["React Native", "Flutter", "Swift", "Kotlin", "mobile UI", "REST APIs", "app store deployment", "Git", "debugging"],
+    "tools": ["GitHub Copilot", "Cursor", "Claude", "ChatGPT", "Expo", "Firebase"],
+    "keywords": ["ios developer", "android developer", "react native developer", "flutter developer", "app developer"]
+  },
+  {
+    "slug": "devops-engineer",
+    "title": "DevOps Engineer",
+    "category": "Software & Data",
+    "description": "Automates build, deployment, and infrastructure so teams ship reliably and often.",
+    "skills": ["CI/CD", "Docker", "Kubernetes", "AWS", "Linux", "scripting", "Terraform", "monitoring", "Git", "networking"],
+    "tools": ["GitHub Copilot", "Claude", "ChatGPT", "Terraform", "Datadog", "K8sGPT"],
+    "keywords": ["devops", "platform engineer", "infrastructure engineer", "build engineer", "release engineer"]
+  },
+  {
+    "slug": "cloud-engineer",
+    "title": "Cloud Engineer",
+    "category": "Software & Data",
+    "description": "Designs, provisions, and secures cloud infrastructure on AWS, Azure, or GCP.",
+    "skills": ["AWS", "Azure", "GCP", "networking", "IAM", "Terraform", "Linux", "scripting", "cost optimization", "security"],
+    "tools": ["Claude", "ChatGPT", "GitHub Copilot", "Terraform", "AWS Q", "Pulumi"],
+    "keywords": ["cloud architect", "aws engineer", "azure engineer", "gcp engineer", "cloud administrator"]
+  },
+  {
+    "slug": "site-reliability-engineer",
+    "title": "Site Reliability Engineer",
+    "category": "Software & Data",
+    "description": "Keeps production systems fast and available through automation, monitoring, and incident response.",
+    "skills": ["monitoring", "incident response", "Kubernetes", "Linux", "scripting", "SLOs", "automation", "capacity planning", "on-call"],
+    "tools": ["Claude", "ChatGPT", "Datadog", "PagerDuty", "Grafana", "GitHub Copilot"],
+    "keywords": ["sre", "reliability engineer", "production engineer", "systems engineer"]
+  },
+  {
+    "slug": "data-analyst",
+    "title": "Data Analyst",
+    "category": "Software & Data",
+    "description": "Turns raw business data into dashboards, reports, and decisions.",
+    "skills": ["SQL", "Excel", "data visualization", "Python", "statistics", "dashboards", "reporting", "stakeholder communication", "data cleaning"],
+    "tools": ["ChatGPT", "Claude", "Julius AI", "Tableau", "Power BI", "Hex"],
+    "keywords": ["business intelligence analyst", "bi analyst", "reporting analyst", "analytics", "insights analyst"]
+  },
+  {
+    "slug": "data-scientist",
+    "title": "Data Scientist",
+    "category": "Software & Data",
+    "description": "Builds statistical and machine learning models to predict outcomes and explain behavior.",
+    "skills": ["Python", "machine learning", "statistics", "SQL", "pandas", "experimentation", "data storytelling", "modeling", "Jupyter"],
+    "tools": ["ChatGPT", "Claude", "GitHub Copilot", "Hugging Face", "Weights & Biases", "Databricks Assistant"],
+    "keywords": ["ml scientist", "applied scientist", "quantitative analyst", "machine learning"]
+  },
+  {
+    "slug": "data-engineer",
+    "title": "Data Engineer",
+    "category": "Software & Data",
+    "description": "Builds the pipelines and warehouses that move and store data at scale.",
+    "skills": ["SQL", "Python", "ETL", "data warehousing", "Airflow", "Spark", "dbt", "cloud platforms", "data modeling"],
+    "tools": ["GitHub Copilot", "Claude", "ChatGPT", "dbt", "Databricks Assistant", "Fivetran"],
+    "keywords": ["etl developer", "pipeline engineer", "analytics engineer", "big data engineer"]
+  },
+  {
+    "slug": "machine-learning-engineer",
+    "title": "Machine Learning Engineer",
+    "category": "Software & Data",
+    "description": "Takes ML models from notebook to production — training, serving, and monitoring them.",
+    "skills": ["Python", "PyTorch", "TensorFlow", "MLOps", "model deployment", "SQL", "APIs", "Docker", "experimentation"],
+    "tools": ["GitHub Copilot", "Claude", "ChatGPT", "Hugging Face", "Weights & Biases", "MLflow"],
+    "keywords": ["ml engineer", "mlops engineer", "deep learning engineer", "ai developer"]
+  },
+  {
+    "slug": "ai-engineer",
+    "title": "AI Engineer",
+    "category": "Software & Data",
+    "description": "Builds products on top of large language models — RAG, agents, and AI-powered features.",
+    "skills": ["Python", "TypeScript", "LLM APIs", "prompt engineering", "RAG", "vector databases", "evals", "APIs", "agents"],
+    "tools": ["Claude API", "OpenAI API", "Cursor", "LangChain", "Pinecone", "LlamaIndex"],
+    "keywords": ["llm engineer", "genai engineer", "generative ai developer", "applied ai engineer"]
+  },
+  {
+    "slug": "prompt-engineer",
+    "title": "Prompt Engineer",
+    "category": "Software & Data",
+    "description": "Designs, tests, and maintains the prompts and evaluation suites behind AI products.",
+    "skills": ["prompt engineering", "LLM evaluation", "writing", "experimentation", "Python basics", "APIs", "domain modeling", "documentation"],
+    "tools": ["Claude", "ChatGPT", "PromptLayer", "LangSmith", "Braintrust", "OpenAI Playground"],
+    "keywords": ["ai prompt specialist", "conversation designer", "llm specialist"]
+  },
+  {
+    "slug": "qa-engineer",
+    "title": "QA Engineer",
+    "category": "Software & Data",
+    "description": "Designs test plans and automation that catch bugs before users do.",
+    "skills": ["test automation", "Selenium", "Playwright", "test planning", "bug reporting", "API testing", "CI/CD", "SQL basics", "attention to detail"],
+    "tools": ["ChatGPT", "Claude", "GitHub Copilot", "Playwright", "Postman", "TestRail"],
+    "keywords": ["quality assurance", "test engineer", "sdet", "automation tester", "manual tester"]
+  },
+  {
+    "slug": "security-analyst",
+    "title": "Security Analyst",
+    "category": "Software & Data",
+    "description": "Monitors, investigates, and hardens systems against security threats.",
+    "skills": ["security monitoring", "SIEM", "incident response", "networking", "vulnerability assessment", "Linux", "scripting", "compliance frameworks"],
+    "tools": ["ChatGPT", "Claude", "Splunk", "CrowdStrike", "Microsoft Security Copilot", "Wireshark"],
+    "keywords": ["cybersecurity analyst", "soc analyst", "information security", "infosec analyst"]
+  },
+  {
+    "slug": "it-support-specialist",
+    "title": "IT Support Specialist",
+    "category": "Software & Data",
+    "description": "Keeps a company's devices, accounts, and everyday tech running for employees.",
+    "skills": ["troubleshooting", "Windows", "macOS", "Active Directory", "networking basics", "ticketing systems", "hardware setup", "customer service"],
+    "tools": ["ChatGPT", "Claude", "Zendesk", "Intune", "TeamViewer", "Freshservice"],
+    "keywords": ["help desk", "desktop support", "it technician", "technical support", "system administrator"]
+  },
+  {
+    "slug": "solutions-architect",
+    "title": "Solutions Architect",
+    "category": "Software & Data",
+    "description": "Designs technical solutions that connect customer problems to a product's capabilities.",
+    "skills": ["system design", "cloud architecture", "presales", "technical writing", "APIs", "stakeholder communication", "diagramming", "security basics"],
+    "tools": ["Claude", "ChatGPT", "Lucidchart", "Miro", "Notion AI", "draw.io"],
+    "keywords": ["technical architect", "enterprise architect", "presales engineer", "cloud architect"]
+  },
+  {
+    "slug": "database-administrator",
+    "title": "Database Administrator",
+    "category": "Software & Data",
+    "description": "Keeps databases fast, backed up, and secure across environments.",
+    "skills": ["SQL", "PostgreSQL", "MySQL", "backup and recovery", "performance tuning", "security", "scripting", "monitoring"],
+    "tools": ["ChatGPT", "Claude", "pgAdmin", "DataGrip", "GitHub Copilot", "Percona"],
+    "keywords": ["dba", "database engineer", "sql administrator"]
+  },
+  {
+    "slug": "automation-engineer",
+    "title": "Automation Engineer",
+    "category": "Software & Data",
+    "description": "Automates repetitive business processes with scripts, RPA, and no-code workflows.",
+    "skills": ["Python", "workflow automation", "APIs", "RPA", "process mapping", "scripting", "no-code tools", "documentation"],
+    "tools": ["Zapier", "Make", "n8n", "ChatGPT", "Claude", "UiPath"],
+    "keywords": ["rpa developer", "workflow automation specialist", "integration engineer", "no-code developer"]
+  },
+  {
+    "slug": "blockchain-developer",
+    "title": "Blockchain Developer",
+    "category": "Software & Data",
+    "description": "Builds smart contracts and decentralized applications.",
+    "skills": ["Solidity", "smart contracts", "JavaScript", "web3 libraries", "security auditing", "testing", "cryptography basics"],
+    "tools": ["GitHub Copilot", "ChatGPT", "Claude", "Hardhat", "Foundry", "Alchemy"],
+    "keywords": ["web3 developer", "smart contract developer", "solidity developer", "crypto developer"]
+  }
+]
