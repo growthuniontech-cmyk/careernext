@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Env / secrets (Claude shouldn't need to read these to work)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Cache
+.cache/
+.turbo/
+.vercel/
+
+# OS/editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Large/binary assets not needed for coding tasks
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.zip
+
+# Test coverage
+coverage/
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/

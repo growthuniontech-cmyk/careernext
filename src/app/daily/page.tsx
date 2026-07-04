@@ -62,7 +62,7 @@ export default function DailyPage() {
       <div className="mx-auto max-w-xl px-5 py-10">
         <StepNav current={3} />
 
-        {/* Streak + job-ready — same formula everywhere */}
+        {/* Streak + job-ready, same formula everywhere */}
         <div className="mt-6 grid grid-cols-2 gap-4">
           <div className="rounded-2xl bg-white border border-charcoal/5 shadow-sm p-5 text-center">
             <p className="font-heading font-bold text-4xl text-gold drop-shadow-sm">
@@ -91,7 +91,7 @@ export default function DailyPage() {
         {steps.length === 0 ? (
           <div className="mt-8 rounded-2xl bg-white border border-charcoal/5 shadow-sm p-7 text-center">
             <p className="text-charcoal/70 text-sm">
-              Your learning path isn&apos;t built yet — that comes first.
+              Your learning path isn&apos;t built yet. That comes first.
             </p>
             <Link
               href="/path"
@@ -104,7 +104,7 @@ export default function DailyPage() {
           <div className="mt-8 rounded-2xl bg-gold-soft border border-gold/40 shadow-sm p-7 text-center">
             <p className="text-4xl">🏆</p>
             <h2 className="mt-3 font-heading font-bold text-xl text-indigo">
-              Path complete — you&apos;re job-ready.
+              Path complete: you&apos;re job-ready.
             </h2>
             <p className="mt-2 text-sm text-charcoal/70">
               You finished every step toward {journey.selectedTitle}. Time to
@@ -126,8 +126,8 @@ export default function DailyPage() {
                   Step verified. Momentum banked.
                 </h2>
                 <p className="mt-2 text-sm text-charcoal/70">
-                  Your job-ready score just moved — on real, verified work.
-                  Small steps, every day — that&apos;s how people actually
+                  Your job-ready score just moved: on real, verified work.
+                  Small steps, every day. That&apos;s how people actually
                   change careers.
                 </p>
                 <button

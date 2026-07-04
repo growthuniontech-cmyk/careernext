@@ -93,7 +93,7 @@
     "slug": "machine-learning-engineer",
     "title": "Machine Learning Engineer",
     "category": "Software & Data",
-    "description": "Takes ML models from notebook to production — training, serving, and monitoring them.",
+    "description": "Takes ML models from notebook to production: training, serving, and monitoring them.",
     "skills": ["Python", "PyTorch", "TensorFlow", "MLOps", "model deployment", "SQL", "APIs", "Docker", "experimentation"],
     "tools": ["GitHub Copilot", "Claude", "ChatGPT", "Hugging Face", "Weights & Biases", "MLflow"],
     "keywords": ["ml engineer", "mlops engineer", "deep learning engineer", "ai developer"]
@@ -102,7 +102,7 @@
     "slug": "ai-engineer",
     "title": "AI Engineer",
     "category": "Software & Data",
-    "description": "Builds products on top of large language models — RAG, agents, and AI-powered features.",
+    "description": "Builds products on top of large language models: RAG, agents, and AI-powered features.",
     "skills": ["Python", "TypeScript", "LLM APIs", "prompt engineering", "RAG", "vector databases", "evals", "APIs", "agents"],
     "tools": ["Claude API", "OpenAI API", "Cursor", "LangChain", "Pinecone", "LlamaIndex"],
     "keywords": ["llm engineer", "genai engineer", "generative ai developer", "applied ai engineer"]

@@ -3,7 +3,7 @@ import { requireUser } from "@/lib/journey";
 import type { ParsedResume } from "@/lib/types";
 
 /** Manual entry point for users without a resume (or when parsing fails).
- *  Creates a resumes row directly from the form — no AI call needed. */
+ *  Creates a resumes row directly from the form, no AI call needed. */
 export async function POST(request: Request) {
   const supabase = await createClient();
   const auth = await requireUser(supabase);

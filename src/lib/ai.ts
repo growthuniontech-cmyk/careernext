@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const MODEL = "claude-opus-4-8";
 
-// Rubric/spec generation is offline + cached per role — use the strongest model.
+// Rubric/spec generation is offline + cached per role, use the strongest model.
 export const RUBRIC_MODEL = "claude-opus-4-8";
 
 export function isClaudeConfigured(): boolean {
@@ -76,7 +76,7 @@ export const ToolkitSchema = z.object({
 });
 
 /** Per-step deliverable spec fields generated from step data. proof_type and
- *  pass_threshold are NOT generated — the deterministic classifier assigns
+ *  pass_threshold are NOT generated, the deterministic classifier assigns
  *  those (src/lib/verification.ts). */
 export const SpecsSchema = z.object({
   specs: z
@@ -85,13 +85,13 @@ export const SpecsSchema = z.object({
         criteria: z
           .array(z.string())
           .describe(
-            "2-4 acceptance criteria — concrete things a passing submission must contain or demonstrate",
+            "2-4 acceptance criteria: concrete things a passing submission must contain or demonstrate",
           ),
         tool_evidence: z
           .string()
           .nullable()
           .describe(
-            'Specific tool output that would evidence real work, e.g. "Ahrefs/Semrush screenshot" — null if no tool evidence applies',
+            'Specific tool output that would evidence real work, e.g. "Ahrefs/Semrush screenshot"; null if no tool evidence applies',
           ),
         anti_gaming_prompt: z
           .string()
@@ -133,7 +133,7 @@ export const GradeSchema = z.object({
   feedback: z
     .string()
     .describe(
-      "2-4 sentences of specific, actionable improvement feedback tied to the criteria — the feedback is the value, not just the gate",
+      "2-4 sentences of specific, actionable improvement feedback tied to the criteria; the feedback is the value, not just the gate. Do not use em dashes or en dashes; use commas, colons, or periods instead.",
     ),
 });
 

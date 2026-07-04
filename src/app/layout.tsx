@@ -20,7 +20,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "CareerNext — Right role. Right tools. Right order.",
+  title: "CareerNext: Right role. Right tools. Right order.",
   description:
     "Upload your resume and get the job title you should target, the exact AI toolkit to learn for it, and a day-by-day path to job-ready.",
 };

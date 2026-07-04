@@ -8,7 +8,7 @@ import type { JobMatch } from "@/lib/types";
 
 export const maxDuration = 60;
 
-const SYSTEM = `You write the "why this match" line for a career-matching product. For each role, write one warm, specific, confidence-building sentence explaining why this person fits, referencing their actual background (titles, skills, industries). Never generic. Audience is global (US, UK, Canada, Australia, India).`;
+const SYSTEM = `You write the "why this match" line for a career-matching product. For each role, write one warm, specific, confidence-building sentence explaining why this person fits, referencing their actual background (titles, skills, industries). Never generic. Audience is global (US, UK, Canada, Australia, India). Do not use em dashes or en dashes; use commas or periods instead.`;
 
 export async function POST() {
   const supabase = await createClient();
@@ -24,7 +24,7 @@ export async function POST() {
   const roles = await loadRoles(supabase);
   const ranked = rankRoles(resume, roles, 5);
 
-  // Personalized reasoning via Claude — one call for all five
+  // Personalized reasoning via Claude, one call for all five
   const reasons = new Map<string, string>();
   if (isClaudeConfigured()) {
     try {
@@ -39,8 +39,8 @@ export async function POST() {
         messages: [
           {
             role: "user",
-            content: `Candidate:\nTitles held: ${resume.titlesHeld.join(", ") || "none yet"}\nYears of experience: ${resume.yearsExperience}\nSkills: ${resume.skills.join(", ")}\nTools used: ${resume.toolsUsed.join(", ")}\nIndustries: ${resume.industries.join(", ") || "n/a"}\nSummary: ${resume.summary}\n\nMatched roles (slug — title — computed match %):\n${ranked
-              .map((r) => `${r.slug} — ${r.title} — ${r.score}%`)
+            content: `Candidate:\nTitles held: ${resume.titlesHeld.join(", ") || "none yet"}\nYears of experience: ${resume.yearsExperience}\nSkills: ${resume.skills.join(", ")}\nTools used: ${resume.toolsUsed.join(", ")}\nIndustries: ${resume.industries.join(", ") || "n/a"}\nSummary: ${resume.summary}\n\nMatched roles (slug - title - computed match %):\n${ranked
+              .map((r) => `${r.slug} - ${r.title} - ${r.score}%`)
               .join("\n")}\n\nWrite one reason per role, keyed by slug.`,
           },
         ],

@@ -11,7 +11,7 @@ const PARSE_MESSAGES = [
   "Reading your resume…",
   "Spotting your transferable skills…",
   "You have more going for you than you think…",
-  "Almost there — mapping your strengths…",
+  "Almost there, mapping your strengths…",
 ];
 
 const MATCH_MESSAGES = [
@@ -21,7 +21,7 @@ const MATCH_MESSAGES = [
 ];
 
 const FALLBACK_COPY =
-  "No resume yet? No problem — tell us where you're starting from, and we'll build your path from there.";
+  "No resume yet? No problem. Tell us where you're starting from, and we'll build your path from there.";
 
 export default function StartPage() {
   const router = useRouter();
@@ -83,7 +83,7 @@ export default function StartPage() {
       }),
     });
     if (!res.ok) {
-      setManualError("That didn't save — mind trying again?");
+      setManualError("That didn't save. Mind trying again?");
       setPhase("manual");
       return;
     }
@@ -106,7 +106,7 @@ export default function StartPage() {
               Let&apos;s find your path
             </h1>
             <p className="mt-3 text-center text-charcoal/70">
-              Start with your resume — or without one. Both work.
+              Start with your resume, or without one. Both work.
             </p>
 
             {phase === "choose" && (
@@ -191,7 +191,7 @@ export default function StartPage() {
               >
                 {parseFailed ? (
                   <p className="rounded-xl bg-gold-soft border border-gold/40 p-4 text-sm text-charcoal/80">
-                    We couldn&apos;t read that file — but nothing is lost.{" "}
+                    We couldn&apos;t read that file, but nothing is lost.{" "}
                     {FALLBACK_COPY}
                   </p>
                 ) : (
@@ -260,7 +260,7 @@ export default function StartPage() {
                   }}
                   className="mt-3 w-full text-sm text-charcoal/50 hover:text-charcoal"
                 >
-                  Back — I&apos;ll upload a resume instead
+                  Back: I&apos;ll upload a resume instead
                 </button>
               </form>
             )}

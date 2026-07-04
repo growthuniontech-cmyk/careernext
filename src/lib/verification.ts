@@ -8,7 +8,7 @@ import type {
 
 /** The generated-verification engine: classifies steps into proof tiers,
  *  builds deterministic fallback specs, migrates legacy cached steps, and
- *  decides pass/refine from grade scores. Pure functions — no I/O. */
+ *  decides pass/refine from grade scores. Pure functions (no I/O). */
 
 const WORK_VERBS =
   /\b(build|builds|building|deliver|create|creates|creating|publish|produce|develop|design|write|draft|launch|ship|record|assemble|set up|implement|make)\b/i;
@@ -51,7 +51,7 @@ export function gradingModelFor(proofType: ProofType): string {
     : "claude-haiku-4-5-20251001";
 }
 
-/** Deterministic spec built from step data alone — used when the rubric
+/** Deterministic spec built from step data alone, used when the rubric
  *  generator is unavailable, and by the schema-migration tests. */
 export function buildFallbackSpec(
   step: { title: string; description: string; unlocks?: string },
@@ -72,7 +72,7 @@ export function buildFallbackSpec(
     criteria,
     pass_threshold: TIER_THRESHOLDS[proofType],
     tool_evidence: null,
-    anti_gaming_prompt: `Walk through how you approached "${step.title}" — what decisions did you make along the way, and why did you make them that way?`,
+    anti_gaming_prompt: `Walk through how you approached "${step.title}": what decisions did you make along the way, and why did you make them that way?`,
     review: "pending",
   };
 }

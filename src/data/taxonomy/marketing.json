@@ -111,7 +111,7 @@
     "slug": "ai-content-strategist",
     "title": "AI Content Strategist",
     "category": "Marketing",
-    "description": "Designs AI-augmented content systems — one strategist producing what used to take a team.",
+    "description": "Designs AI-augmented content systems, one strategist producing what used to take a team.",
     "skills": ["content strategy", "prompt engineering", "editing", "SEO", "brand voice", "workflow design", "analytics", "repurposing", "quality control"],
     "tools": ["Claude", "ChatGPT", "Jasper", "Surfer SEO", "Descript", "Perplexity"],
     "keywords": ["ai content manager", "content operations", "editorial strategist", "content systems"]
@@ -120,7 +120,7 @@
     "slug": "copywriter",
     "title": "Copywriter",
     "category": "Marketing",
-    "description": "Writes the words that sell — ads, landing pages, emails, and campaigns.",
+    "description": "Writes the words that sell: ads, landing pages, emails, and campaigns.",
     "skills": ["copywriting", "persuasion", "brand voice", "editing", "research", "headlines", "A/B testing", "storytelling"],
     "tools": ["Claude", "ChatGPT", "Grammarly", "Hemingway", "Jasper", "Notion AI"],
     "keywords": ["advertising copywriter", "conversion copywriter", "creative writer", "content writer"]

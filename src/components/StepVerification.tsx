@@ -106,7 +106,7 @@ export default function StepVerification({
   return (
     <div className="mt-4 rounded-xl bg-cream/60 border border-charcoal/10 p-4 space-y-3">
       <p className="text-xs uppercase tracking-widest font-semibold text-indigo/70">
-        {TIER_LABELS[spec.proof_type]} — verified before it counts
+        {TIER_LABELS[spec.proof_type]}, verified before it counts
       </p>
 
       <ul className="text-xs text-charcoal/60 space-y-1">
@@ -183,7 +183,7 @@ export default function StepVerification({
                 value={artifact}
                 onChange={(e) => setArtifact(e.target.value)}
                 rows={5}
-                placeholder="Paste the deliverable — copy, plan, code, outline…"
+                placeholder="Paste the deliverable: copy, plan, code, outline…"
                 className={`mt-1.5 ${inputClass}`}
               />
             </label>
@@ -214,7 +214,7 @@ export default function StepVerification({
       {feedback && (
         <div className="rounded-lg bg-gold-soft border border-gold/40 px-3.5 py-3 text-sm text-charcoal/80">
           <p className="font-semibold text-indigo text-xs uppercase tracking-wide mb-1">
-            Almost — refine and resubmit
+            Almost: refine and resubmit
           </p>
           {feedback}
         </div>

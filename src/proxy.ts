@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
 /** Refreshes the Supabase session cookie and gates the app flow behind auth.
- *  API routes also verify auth themselves — this is the optimistic layer. */
+ *  API routes also verify auth themselves; this is the optimistic layer. */
 export async function proxy(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -38,7 +38,7 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  // Refreshes the token if expired — do not remove.
+  // Refreshes the token if expired; do not remove.
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -3,7 +3,7 @@
     "slug": "sales-development-representative",
     "title": "Sales Development Representative",
     "category": "Sales & Customer Success",
-    "description": "Opens doors — researches prospects, writes outreach, and books qualified meetings.",
+    "description": "Opens doors: researches prospects, writes outreach, and books qualified meetings.",
     "skills": ["prospecting", "cold outreach", "email writing", "CRM", "qualification", "objection handling", "research", "call scripts", "persistence"],
     "tools": ["ChatGPT", "Claude", "Apollo", "Clay", "Lavender", "Outreach"],
     "keywords": ["sdr", "bdr", "business development representative", "inside sales", "lead generation"]
@@ -12,7 +12,7 @@
     "slug": "account-executive",
     "title": "Account Executive",
     "category": "Sales & Customer Success",
-    "description": "Runs the full sales cycle — discovery, demos, negotiation, and close.",
+    "description": "Runs the full sales cycle: discovery, demos, negotiation, and close.",
     "skills": ["discovery calls", "demos", "negotiation", "pipeline management", "CRM", "forecasting", "objection handling", "closing", "relationship building"],
     "tools": ["Gong", "ChatGPT", "Claude", "Salesforce Einstein", "Apollo", "Fathom"],
     "keywords": ["ae", "sales executive", "sales representative", "closer", "field sales"]
@@ -30,7 +30,7 @@
     "slug": "sales-operations-analyst",
     "title": "Sales Operations Analyst",
     "category": "Sales & Customer Success",
-    "description": "Keeps the sales machine running — CRM hygiene, territories, quotas, and reporting.",
+    "description": "Keeps the sales machine running: CRM hygiene, territories, quotas, and reporting.",
     "skills": ["Salesforce", "reporting", "Excel", "process design", "forecasting", "data hygiene", "dashboards", "commission tracking"],
     "tools": ["ChatGPT", "Claude", "Salesforce Einstein", "Tableau", "Zapier", "Clari"],
     "keywords": ["sales ops", "revenue operations", "revops analyst", "crm administrator", "salesforce admin"]
@@ -66,7 +66,7 @@
     "slug": "solutions-consultant",
     "title": "Solutions Consultant",
     "category": "Sales & Customer Success",
-    "description": "The technical side of the sales team — demos, POCs, and solution design.",
+    "description": "The technical side of the sales team: demos, POCs, and solution design.",
     "skills": ["demos", "solution design", "technical discovery", "presentation", "APIs basics", "proposal writing", "objection handling", "product depth"],
     "tools": ["Claude", "ChatGPT", "Gong", "Loom AI", "Notion AI", "Miro"],
     "keywords": ["presales consultant", "sales engineer", "solution engineer", "technical consultant"]

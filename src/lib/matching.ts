@@ -2,7 +2,7 @@ import type { ParsedResume } from "./types";
 
 /** Deterministic similarity engine between a parsed resume and the role
  *  taxonomy. Weighted token-overlap across skills, tools, titles, and
- *  industry — fast, free, and explainable. Claude adds the personalized
+ *  industry, fast, free, and explainable. Claude adds the personalized
  *  "why this match" reasoning on top of these rankings. */
 
 export type ScorableRole = {

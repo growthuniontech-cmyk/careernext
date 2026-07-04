@@ -3,7 +3,7 @@
     "slug": "hr-generalist",
     "title": "HR Generalist",
     "category": "Human Resources",
-    "description": "Handles the full spread of people work — policies, employee relations, and onboarding.",
+    "description": "Handles the full spread of people work: policies, employee relations, and onboarding.",
     "skills": ["employee relations", "HR policies", "onboarding", "HRIS systems", "compliance", "benefits basics", "communication", "confidentiality"],
     "tools": ["ChatGPT", "Claude", "BambooHR", "Notion AI", "Rippling", "Canva Magic Studio"],
     "keywords": ["hr specialist", "hr executive", "people operations generalist", "hr officer"]
@@ -21,7 +21,7 @@
     "slug": "technical-recruiter",
     "title": "Technical Recruiter",
     "category": "Human Resources",
-    "description": "Recruits engineers and technical talent — speaking enough tech to screen well.",
+    "description": "Recruits engineers and technical talent, speaking enough tech to screen well.",
     "skills": ["technical sourcing", "screening", "tech stack literacy", "ATS systems", "boolean search", "candidate experience", "offer negotiation", "market mapping"],
     "tools": ["LinkedIn Recruiter", "ChatGPT", "Claude", "Gem", "hireEZ", "Metaview"],
     "keywords": ["tech recruiter", "engineering recruiter", "it recruiter", "technical talent acquisition"]
@@ -30,7 +30,7 @@
     "slug": "hr-operations-specialist",
     "title": "HR Operations Specialist",
     "category": "Human Resources",
-    "description": "Runs the systems and processes behind HR — data, workflows, and compliance.",
+    "description": "Runs the systems and processes behind HR: data, workflows, and compliance.",
     "skills": ["HRIS administration", "process design", "data accuracy", "reporting", "compliance", "onboarding workflows", "documentation", "Excel"],
     "tools": ["ChatGPT", "Claude", "Rippling", "Workday", "Zapier", "Notion AI"],
     "keywords": ["people operations", "hris analyst", "hr coordinator", "hr administrator"]

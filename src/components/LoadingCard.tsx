@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Friendly loading state for the 10-20s AI steps — rotating reassurance so
+/** Friendly loading state for the 10-20s AI steps, rotating reassurance so
  *  the screen never feels broken. */
 export default function LoadingCard({ messages }: { messages: string[] }) {
   const [index, setIndex] = useState(0);
@@ -28,7 +28,7 @@ export default function LoadingCard({ messages }: { messages: string[] }) {
         {messages[index]}
       </p>
       <p className="text-sm text-charcoal/60 max-w-xs">
-        This usually takes 10–20 seconds. Good things are happening.
+        This usually takes 10-20 seconds. Good things are happening.
       </p>
     </div>
   );

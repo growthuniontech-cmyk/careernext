@@ -27,7 +27,7 @@ function cacheSteps(roleSlug: string, steps: PathStep[]) {
 }
 
 /** Paths + their verification specs are generated once per role and cached in
- *  role_paths — every user targeting the same role shares them; progress and
+ *  role_paths, every user targeting the same role shares them; progress and
  *  verification state are per-user. */
 export async function POST() {
   const supabase = await createClient();

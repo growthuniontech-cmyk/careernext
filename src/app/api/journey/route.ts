@@ -23,7 +23,7 @@ export async function GET() {
       .eq("role_slug", journey.selectedRoleSlug)
       .maybeSingle();
     const raw = (data?.steps as PathStep[]) ?? undefined;
-    // Legacy rows without specs are treated as absent — the path page then
+    // Legacy rows without specs are treated as absent, the path page then
     // calls /api/learning-path, which migrates and re-caches them.
     pathSteps = raw && stepsHaveSpecs(raw) ? sanitizeStepsForClient(raw) : undefined;
   }

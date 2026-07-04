@@ -17,7 +17,7 @@ const TIERS: {
     key: "high",
     label: "High impact",
     badge: "bg-teal text-white",
-    hint: "Learn these first — you'll use them daily.",
+    hint: "Learn these first, you'll use them daily.",
   },
   {
     key: "medium",
@@ -30,7 +30,7 @@ const TIERS: {
 const LOADING_MESSAGES = [
   "Building your toolkit…",
   "Matching tools to your gaps…",
-  "Cutting the noise — only what matters…",
+  "Cutting the noise, only what matters…",
 ];
 
 export default function ToolkitPage() {
@@ -86,7 +86,7 @@ export default function ToolkitPage() {
           Your AI toolkit for {title}
         </h1>
         <p className="mt-3 text-center text-charcoal/70">
-          Not every tool — the right ones for your background, in order of
+          Not every tool: the right ones for your background, in order of
           impact.
         </p>
 

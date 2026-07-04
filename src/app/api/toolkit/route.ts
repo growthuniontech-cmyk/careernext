@@ -19,7 +19,8 @@ type ToolRow = {
 const SYSTEM = `You build personalized AI toolkits for a specific person targeting a specific job. Rules:
 - Choose 6-8 tools FROM THE CANDIDATE LIST ONLY, by exact name.
 - "high" tier: 3-4 tools they'd use daily in this role. "medium": 3-4 weekly support tools.
-- Every reason must (a) name a real task in this job and (b) connect to this person's actual background — a gap to close or a strength to amplify. Never a generic tool description.`;
+- Every reason must (a) name a real task in this job and (b) connect to this person's actual background: a gap to close or a strength to amplify. Never a generic tool description.
+- Do not use em dashes or en dashes; use commas, colons, or periods instead.`;
 
 function normalize(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();

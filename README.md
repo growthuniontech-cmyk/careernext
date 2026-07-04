@@ -7,19 +7,19 @@ Next.js 16 + Tailwind 4 · Supabase (auth + Postgres) · Claude API · Notion sy
 
 ## Phase 1 architecture
 
-1. **Auth** — Supabase Auth: magic-link email + Google OAuth. All flow pages
+1. **Auth**: Supabase Auth, magic-link email + Google OAuth. All flow pages
    and API routes are gated (see `src/proxy.ts`); progress persists per account.
-2. **Resume parsing** — PDF (`pdf-parse`) / DOCX (`mammoth`) → raw text →
+2. **Resume parsing**: PDF (`pdf-parse`) / DOCX (`mammoth`) → raw text →
    Claude (`claude-opus-4-8`, structured outputs) → `resumes` table.
-3. **Role taxonomy** — 103 roles with skill/tool profiles authored in
+3. **Role taxonomy**: 103 roles with skill/tool profiles authored in
    `src/data/taxonomy/*.json`, seeded once into the `roles` table (`npm run seed`).
-4. **Matching** — deterministic weighted similarity (skills/tools/title/industry)
+4. **Matching**: deterministic weighted similarity (skills/tools/title/industry)
    in `src/lib/matching.ts` ranks the taxonomy against the parsed resume;
    Claude writes the personalized "why this match" per result.
-5. **Toolkit** — candidates pulled from the `ai_tools` table (mirrored from the
+5. **Toolkit**: candidates pulled from the `ai_tools` table (mirrored from the
    Notion tool database via `npm run sync:notion`; seeded fallback included);
    Claude selects and personalizes reasons into High/Medium tiers.
-6. **Learning path + progress** — 5-step path generated once per role, cached
+6. **Learning path + progress**: 5-step path generated once per role, cached
    in `role_paths`. Job-ready % = completed steps ÷ total, computed in ONE
    place (`computeJobReadyPercent`) and used everywhere it appears.
 

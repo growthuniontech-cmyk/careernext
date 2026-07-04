@@ -12,6 +12,7 @@
   --color-charcoal: #1f2937;
   --color-gold: #ffc857;
   --color-gold-soft: #fff4dc;
+  --color-ink: #0d1730;
 
   --font-heading: var(--font-poppins), system-ui, sans-serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
@@ -80,4 +81,105 @@ h4 {
 }
 .rise-in-delay-3 {
   animation-delay: 0.36s;
+}
+
+/* ---- Landing page: dark cinematic surface (urbi-inspired glow/depth) ---- */
+
+.landing-surface {
+  background:
+    radial-gradient(1100px 600px at 15% -5%, rgba(42, 63, 110, 0.55), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(18, 184, 134, 0.07), transparent 55%),
+    radial-gradient(1000px 700px at 50% 105%, rgba(42, 63, 110, 0.4), transparent 65%),
+    var(--color-ink);
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 35%, rgba(13, 23, 48, 0.55) 100%),
+    linear-gradient(to bottom, rgba(13, 23, 48, 0.35), transparent 30%, transparent 65%, var(--color-ink) 100%);
+}
+
+.glow-band {
+  background: radial-gradient(600px 280px at 50% 0%, rgba(18, 184, 134, 0.09), transparent 70%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(18, 184, 134, 0.4);
+  box-shadow: 0 0 44px -14px rgba(18, 184, 134, 0.5);
+  transform: translateY(-3px);
+}
+
+/* Scroll-triggered reveals */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Step-card motif animations, play when the parent Reveal enters view */
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes node-pop {
+  from {
+    opacity: 0.15;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.draw-path {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+}
+
+.reveal-visible .draw-path {
+  animation: draw-path 1.3s ease 0.35s forwards;
+}
+
+.motif-dot {
+  opacity: 0.15;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.reveal-visible .motif-dot {
+  animation: node-pop 0.5s ease forwards;
+  animation-delay: var(--d, 0.4s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal-visible .draw-path,
+  .reveal-visible .motif-dot,
+  .hero-gradient {
+    animation: none;
+  }
+  .draw-path {
+    stroke-dashoffset: 0;
+  }
+  .motif-dot {
+    opacity: 1;
+  }
 }

@@ -55,7 +55,7 @@ export default function ResultsPage() {
           Here&apos;s where you match
         </h1>
         <p className="mt-3 text-center text-charcoal/70">
-          Ranked against your actual background. Pick the one that feels right —
+          Ranked against your actual background. Pick the one that feels right,
           you can come back and switch.
         </p>
 

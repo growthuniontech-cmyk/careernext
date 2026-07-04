@@ -19,7 +19,7 @@ export async function createClient() {
               cookieStore.set(name, value, options),
             );
           } catch {
-            // Called from a Server Component — session refresh is handled by proxy.ts
+            // Called from a Server Component; session refresh is handled by proxy.ts
           }
         },
       },
@@ -28,7 +28,7 @@ export async function createClient() {
 }
 
 /** Service-role client for shared-table writes (roles, ai_tools, role_paths).
- *  Server only — bypasses RLS. */
+ *  Server only; bypasses RLS. */
 export function createAdminClient() {
   return createBareClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

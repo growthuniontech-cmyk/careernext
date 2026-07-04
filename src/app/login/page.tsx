@@ -54,11 +54,11 @@ function LoginForm() {
     }
     if (error.code === "over_email_send_rate_limit" || error.status === 429) {
       setErrorMessage(
-        "Too many sign-in emails in the last hour — that's an email-provider limit, not you. Wait a little while and try again, or use Google sign-in.",
+        "Too many sign-in emails in the last hour, that's an email-provider limit, not you. Wait a little while and try again, or use Google sign-in.",
       );
     } else {
       setErrorMessage(
-        error.message || "That didn't send — mind trying again?",
+        error.message || "That didn't send. Mind trying again?",
       );
     }
     setState("error");
@@ -86,7 +86,7 @@ function LoginForm() {
 
       {authError && (
         <p className="mt-4 rounded-xl bg-gold-soft border border-gold/40 p-3 text-sm text-charcoal/80 text-center">
-          That sign-in link didn&apos;t work — it may have expired. Try again
+          That sign-in link didn&apos;t work, it may have expired. Try again
           below.
         </p>
       )}

@@ -8,7 +8,7 @@ import {
 import type { PathStep } from "./types";
 
 /** Attaches a generated DeliverableSpec to each step. Works for both freshly
- *  generated paths and legacy cached steps (schema migration) — the spec is
+ *  generated paths and legacy cached steps (schema migration); the spec is
  *  generated from the same step data either way, then cached in role_paths so
  *  every user targeting the role reuses it. Falls back to deterministic specs
  *  if the rubric model is unavailable. */
@@ -20,7 +20,7 @@ type RawStep = {
   unlocks?: string;
 };
 
-const SYSTEM = `You write verification rubrics for career-path learning steps. For each step you receive, produce the acceptance criteria a submission must meet to prove the step was genuinely completed, the tool evidence (if any real tool output would prove the work), a reasoning question that is hard to answer without having done the work, and a scenario MCQ testing the concept on the job. Be concrete and checkable — a grader will score submissions against your criteria.`;
+const SYSTEM = `You write verification rubrics for career-path learning steps. For each step you receive, produce the acceptance criteria a submission must meet to prove the step was genuinely completed, the tool evidence (if any real tool output would prove the work), a reasoning question that is hard to answer without having done the work, and a scenario MCQ testing the concept on the job. Be concrete and checkable; a grader will score submissions against your criteria. Do not use em dashes or en dashes anywhere in your output; use commas, colons, or periods instead.`;
 
 export async function generateDeliverables(
   roleTitle: string,

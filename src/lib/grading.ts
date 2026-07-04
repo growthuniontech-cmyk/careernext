@@ -17,7 +17,7 @@ export type GradeResult = {
   feedback: string;
 };
 
-const SYSTEM = `You are the verification grader for a career-learning platform. A learner submitted proof of completing a learning step. Score it 0-1 on four dimensions: authenticity (is it plausibly their real work — generic, copy-pasted, or fabricated submissions score low), completeness (does it cover the acceptance criteria), correctness (is it right), reasoning (do they understand why they did what they did). Be fair to beginners — early steps expect beginner-level work — but never reward effort-free submissions: if a submission is a single word, a throwaway phrase, or contains no specifics that could only come from doing the work, score every dimension below 0.3. Your feedback must be specific and actionable: name what's missing against the criteria and what to improve, in an encouraging tone.`;
+const SYSTEM = `You are the verification grader for a career-learning platform. A learner submitted proof of completing a learning step. Score it 0-1 on four dimensions: authenticity (is it plausibly their real work; generic, copy-pasted, or fabricated submissions score low), completeness (does it cover the acceptance criteria), correctness (is it right), reasoning (do they understand why they did what they did). Be fair to beginners (early steps expect beginner-level work) but never reward effort-free submissions: if a submission is a single word, a throwaway phrase, or contains no specifics that could only come from doing the work, score every dimension below 0.3. Your feedback must be specific and actionable: name what's missing against the criteria and what to improve, in an encouraging tone. Do not use em dashes or en dashes in your feedback; use commas, colons, or periods instead.`;
 
 export async function gradeSubmission(
   step: { title: string; description: string },
@@ -39,7 +39,7 @@ export async function gradeSubmission(
     const mcqCorrect = picked === spec.quiz.correctIndex;
     parts.push(
       `Scenario question: ${spec.quiz.scenario}`,
-      `They picked: "${spec.quiz.options[picked] ?? "(no answer)"}" — this is ${mcqCorrect ? "the CORRECT" : "an INCORRECT"} answer (verified programmatically; factor into correctness).`,
+      `They picked: "${spec.quiz.options[picked] ?? "(no answer)"}", which is ${mcqCorrect ? "the CORRECT" : "an INCORRECT"} answer (verified programmatically; factor into correctness).`,
     );
   }
 
@@ -56,7 +56,7 @@ export async function gradeSubmission(
     model,
     max_tokens: 1500,
     output_config: {
-      // effort is unsupported on haiku-4-5 — only pass it for the sonnet grader
+      // effort is unsupported on haiku-4-5, only pass it for the sonnet grader
       ...(model === "claude-sonnet-5" ? { effort: "medium" as const } : {}),
       format: zodOutputFormat(GradeSchema),
     },

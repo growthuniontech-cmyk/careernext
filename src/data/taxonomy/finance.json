@@ -21,7 +21,7 @@
     "slug": "accountant",
     "title": "Accountant",
     "category": "Finance",
-    "description": "Maintains accurate books — journal entries, reconciliations, and financial statements.",
+    "description": "Maintains accurate books: journal entries, reconciliations, and financial statements.",
     "skills": ["general ledger", "reconciliations", "GAAP", "month-end close", "Excel", "accounts payable", "accounts receivable", "ERP systems"],
     "tools": ["Excel Copilot", "ChatGPT", "Claude", "QuickBooks", "Xero", "FloQast"],
     "keywords": ["staff accountant", "general accountant", "senior accountant", "accounting associate"]

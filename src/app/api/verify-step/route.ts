@@ -21,7 +21,7 @@ function dateString(offsetDays = 0): string {
   ).padStart(2, "0")}`;
 }
 
-/** POST { stepIndex, submission } — the ONLY way a step completes and
+/** POST { stepIndex, submission }, the ONLY way a step completes and
  *  job-ready % moves. Grades the submission against the cached spec; a pass
  *  verdict marks the step complete, a refine verdict returns feedback. */
 export async function POST(request: Request) {
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "invalid_step" }, { status: 400 });
   }
   if (!stepsHaveSpecs(steps)) {
-    // Legacy cached path — the client regenerates via /api/learning-path first
+    // Legacy cached path, the client regenerates via /api/learning-path first
     return Response.json({ error: "specs_missing" }, { status: 409 });
   }
 
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   if (done.has(stepIndex)) {
     return Response.json({ error: "already_verified" }, { status: 409 });
   }
-  // Steps unlock in order — every earlier step must already be verified
+  // Steps unlock in order, every earlier step must already be verified
   for (let i = 0; i < stepIndex; i++) {
     if (!done.has(i)) {
       return Response.json({ error: "step_locked" }, { status: 409 });

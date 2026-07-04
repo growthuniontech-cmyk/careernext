@@ -36,14 +36,14 @@ export type ToolkitTool = {
 export type ProofType = "attest" | "knowledge" | "work" | "skill";
 
 /** Scenario MCQ attached to knowledge-tier specs. correctIndex is stripped
- *  before steps are sent to the client — only the server grades it. */
+ *  before steps are sent to the client; only the server grades it. */
 export type SpecQuiz = {
   scenario: string;
   options: string[];
   correctIndex?: number;
 };
 
-/** Structured deliverable spec — generated once per canonical step and cached
+/** Structured deliverable spec, generated once per canonical step and cached
  *  in role_paths. Replaces the old free-text "unlocks" string. */
 export type DeliverableSpec = {
   proof_type: ProofType;
@@ -70,9 +70,9 @@ export type StepSubmission = {
   reflection?: string; // attest
   mcqIndex?: number; // knowledge
   shortAnswer?: string; // knowledge
-  artifact?: string; // work — pasted artifact text
+  artifact?: string; // work: pasted artifact text
   link?: string; // work (optional) / skill (required live link)
-  reasoning?: string; // work + skill — answer to anti_gaming_prompt
+  reasoning?: string; // work + skill: answer to anti_gaming_prompt
 };
 
 export type GradeScores = {
@@ -96,7 +96,7 @@ export type Progress = {
   lastCompletedDate: string | null; // YYYY-MM-DD
 };
 
-/** Shape of journeys.data jsonb — one row per user. */
+/** Shape of journeys.data jsonb, one row per user. */
 export type JourneyData = {
   matches?: JobMatch[];
   selectedRoleSlug?: string;

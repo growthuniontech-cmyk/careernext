@@ -3,7 +3,7 @@
     "slug": "operations-manager",
     "title": "Operations Manager",
     "category": "Operations",
-    "description": "Keeps the business running — processes, vendors, metrics, and day-to-day execution.",
+    "description": "Keeps the business running: processes, vendors, metrics, and day-to-day execution.",
     "skills": ["process improvement", "project management", "budgeting", "vendor management", "Excel", "reporting", "team coordination", "problem solving"],
     "tools": ["ChatGPT", "Claude", "Notion AI", "Zapier", "Asana", "Airtable"],
     "keywords": ["ops manager", "business operations manager", "general manager", "operations lead"]
@@ -93,7 +93,7 @@
     "slug": "process-improvement-specialist",
     "title": "Process Improvement Specialist",
     "category": "Operations",
-    "description": "Finds and fixes inefficiency — mapping workflows and leading lean initiatives.",
+    "description": "Finds and fixes inefficiency: mapping workflows and leading lean initiatives.",
     "skills": ["process mapping", "lean six sigma", "data analysis", "change management", "workshop facilitation", "documentation", "KPIs", "automation basics"],
     "tools": ["ChatGPT", "Claude", "Lucidchart", "Miro", "Zapier", "Power BI"],
     "keywords": ["continuous improvement", "lean specialist", "operational excellence", "six sigma"]
@@ -102,7 +102,7 @@
     "slug": "chief-of-staff",
     "title": "Chief of Staff",
     "category": "Operations",
-    "description": "An executive's force multiplier — running strategic projects and keeping leadership aligned.",
+    "description": "An executive's force multiplier, running strategic projects and keeping leadership aligned.",
     "skills": ["strategic planning", "executive communication", "project management", "analysis", "meeting facilitation", "writing", "prioritization", "discretion"],
     "tools": ["Claude", "ChatGPT", "Notion AI", "Fireflies", "Miro", "Superhuman"],
     "keywords": ["strategy and operations", "business manager", "executive operations"]

@@ -39,7 +39,7 @@
     "slug": "editor",
     "title": "Editor",
     "category": "Content & Media",
-    "description": "Shapes other people's writing — structure, clarity, accuracy, and voice.",
+    "description": "Shapes other people's writing: structure, clarity, accuracy, and voice.",
     "skills": ["editing", "proofreading", "style guides", "fact-checking", "feedback", "content planning", "headline writing", "CMS"],
     "tools": ["Claude", "ChatGPT", "Grammarly", "Hemingway", "Notion AI", "Perplexity"],
     "keywords": ["copy editor", "managing editor", "content editor", "sub editor"]
@@ -120,7 +120,7 @@
     "slug": "healthcare-administrator",
     "title": "Healthcare Administrator",
     "category": "Education & Professional Services",
-    "description": "Manages the business side of clinics and health services — scheduling, billing, compliance.",
+    "description": "Manages the business side of clinics and health services: scheduling, billing, compliance.",
     "skills": ["scheduling", "medical billing basics", "EHR systems", "compliance", "patient communication", "staff coordination", "reporting", "confidentiality"],
     "tools": ["ChatGPT", "Claude", "Epic", "Zocdoc", "Excel Copilot", "Notion AI"],
     "keywords": ["practice manager", "medical office manager", "health services manager", "clinic administrator"]

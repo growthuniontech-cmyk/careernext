@@ -16,7 +16,7 @@ declare global {
 // evaluation time: `DOMMatrix` (for text-position matrix math) and a
 // dynamic `import()` of its own worker module (to set up a Node "fake
 // worker"). Both must be prepared *before* pdf-parse is imported, and both
-// must happen inside this request's try/catch — importing pdf-parse itself
+// must happen inside this request's try/catch; importing pdf-parse itself
 // is therefore also deferred to a dynamic import here, not a static
 // top-level one, so ordering is guaranteed and a bundling problem with any
 // of this can't crash the whole route module.
@@ -35,7 +35,7 @@ async function loadPdfParse() {
 const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB
 
 const SYSTEM =
-  "You extract structured career profiles from resume text for a career guidance tool. Be accurate and generous — surface transferable skills, not just literal keywords. For sparse resumes (freshers), infer sensible titlesHeld from education (e.g. 'Computer Science Graduate').";
+  "You extract structured career profiles from resume text for a career guidance tool. Be accurate and generous; surface transferable skills, not just literal keywords. For sparse resumes (freshers), infer sensible titlesHeld from education (e.g. 'Computer Science Graduate'). Do not use em dashes or en dashes; use commas or periods instead.";
 
 export async function POST(request: Request) {
   const supabase = await createClient();

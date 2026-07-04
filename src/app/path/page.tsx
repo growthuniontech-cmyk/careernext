@@ -139,7 +139,7 @@ export default function PathPage() {
                   />
                 </div>
                 <p className="mt-2 text-[11px] text-white/50">
-                  Moves only on verified work — never on a checkbox.
+                  Moves only on verified work, never on a checkbox.
                 </p>
               </div>
             </div>
