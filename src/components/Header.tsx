@@ -99,6 +99,16 @@ export default function Header({ solid = false }: { solid?: boolean }) {
         </Link>
         <div className="flex items-center gap-4">
           {user && (
+            <nav className="hidden sm:flex items-center gap-4 text-sm font-medium text-white/80">
+              <Link href="/ats" className="hover:text-white transition-colors">
+                ATS Score
+              </Link>
+              <Link href="/builder" className="hover:text-white transition-colors">
+                Resume Builder
+              </Link>
+            </nav>
+          )}
+          {user && (
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setMenuOpen((open) => !open)}

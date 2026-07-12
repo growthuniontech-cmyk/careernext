@@ -115,6 +115,112 @@ export type JourneyView = JourneyData & {
   jobReadyPercent: number; // single source of truth: completed ÷ total steps
 };
 
+// ============ Phase 2: ATS scoring ============
+
+export type AtsFormattingFlag = {
+  id: string;
+  label: string;
+  pass: boolean;
+  detail: string;
+};
+
+export type AtsSectionCheck = {
+  section: string;
+  present: boolean;
+  detail: string;
+};
+
+export type AtsScoreResult = {
+  overallScore: number; // 0-100
+  keywordMatchPercent: number; // 0-100
+  matchedKeywords: string[];
+  missingKeywords: string[]; // must-have JD keywords absent from the resume
+  formattingFlags: AtsFormattingFlag[];
+  sectionCompleteness: AtsSectionCheck[];
+  suggestions: string[]; // specific, actionable, never generic
+  jdSource: "pasted" | "role";
+  scoredAt: string; // ISO timestamp
+};
+
+// ============ Phase 2: guided resume builder ============
+
+export type ExperienceLevel = "fresher" | "experienced";
+
+export type ExperienceEntry = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string; // "Present" allowed
+  /** Guided input, captured before AI rewriting is offered. */
+  challenge: string;
+  change: string;
+  metric: string;
+  /** Final bullets shown on the resume: user edits or AI rewrite output. */
+  bullets: string[];
+};
+
+export type EducationEntry = {
+  id: string;
+  degree: string;
+  school: string;
+  year: string;
+};
+
+export type BuilderHeader = {
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+  linkedin: string;
+  portfolio: string;
+};
+
+export type BuilderSections = {
+  experienceLevel: ExperienceLevel;
+  header: BuilderHeader;
+  summary: string;
+  coreCompetencies: string[];
+  experience: ExperienceEntry[];
+  awards: string[];
+  education: EducationEntry[];
+  certifications: string[];
+  memberships: string[];
+  publications: string[];
+  volunteer: string[];
+};
+
+export type BuilderResume = {
+  sections: BuilderSections;
+  jdText: string | null;
+  atsScore: AtsScoreResult | null;
+  updatedAt: string | null;
+};
+
+export const EMPTY_BUILDER_SECTIONS: BuilderSections = {
+  experienceLevel: "experienced",
+  header: {
+    name: "",
+    title: "",
+    email: "",
+    phone: "",
+    location: "",
+    linkedin: "",
+    portfolio: "",
+  },
+  summary: "",
+  coreCompetencies: [],
+  experience: [],
+  awards: [],
+  education: [],
+  certifications: [],
+  memberships: [],
+  publications: [],
+  volunteer: [],
+};
+
 /** The one job-ready formula, used everywhere the number appears. */
 export function computeJobReadyPercent(
   completedSteps: number[] | undefined,

@@ -67,9 +67,14 @@ create table if not exists public.resumes (
   filename text,
   raw_text text not null,
   parsed jsonb not null, -- {skills[], titlesHeld[], yearsExperience, toolsUsed[], industries[], education[], summary}
+  -- ATS score (Phase 2) for this specific resume version; null until scored,
+  -- recalculated in place whenever /api/ats-score runs against this row.
+  ats_score jsonb,
   created_at timestamptz not null default now()
 );
 create index if not exists resumes_user_id_idx on public.resumes (user_id, created_at desc);
+-- Migration for pre-existing rows/tables (Phase 1 deploys): safe to re-run.
+alter table public.resumes add column if not exists ats_score jsonb;
 
 -- One journey row per user: current matches, selected role, toolkit, progress.
 create table if not exists public.journeys (
@@ -78,8 +83,21 @@ create table if not exists public.journeys (
   updated_at timestamptz not null default now()
 );
 
+-- Phase 2: one guided-builder resume in progress per user.
+-- sections: {header, summary, coreCompetencies[], experience[], awards[],
+--            education[], certifications[], memberships[], publications[],
+--            volunteer[], experienceLevel}
+create table if not exists public.builder_resumes (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  sections jsonb not null default '{}'::jsonb,
+  jd_text text,
+  ats_score jsonb,
+  updated_at timestamptz not null default now()
+);
+
 alter table public.resumes enable row level security;
 alter table public.journeys enable row level security;
+alter table public.builder_resumes enable row level security;
 
 drop policy if exists "Users read own resumes" on public.resumes;
 create policy "Users read own resumes"
@@ -97,6 +115,16 @@ create policy "Users insert own journey"
 drop policy if exists "Users update own journey" on public.journeys;
 create policy "Users update own journey"
   on public.journeys for update using (auth.uid() = user_id);
+
+drop policy if exists "Users read own builder resume" on public.builder_resumes;
+create policy "Users read own builder resume"
+  on public.builder_resumes for select using (auth.uid() = user_id);
+drop policy if exists "Users insert own builder resume" on public.builder_resumes;
+create policy "Users insert own builder resume"
+  on public.builder_resumes for insert with check (auth.uid() = user_id);
+drop policy if exists "Users update own builder resume" on public.builder_resumes;
+create policy "Users update own builder resume"
+  on public.builder_resumes for update using (auth.uid() = user_id);
 
 -- ============ Lead capture (kept from Phase 0) ============
 

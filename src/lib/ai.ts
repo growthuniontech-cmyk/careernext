@@ -6,6 +6,11 @@ export const MODEL = "claude-opus-4-8";
 // Rubric/spec generation is offline + cached per role, use the strongest model.
 export const RUBRIC_MODEL = "claude-opus-4-8";
 
+// Phase 2 (ATS scoring, resume builder rewrite/tailoring): scoring and prompt
+// fidelity matter more than raw power here, and this is the same model the
+// verification grader already uses for its hardest tier (see verification.ts).
+export const RESUME_MODEL = "claude-sonnet-5";
+
 export function isClaudeConfigured(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
@@ -135,6 +140,99 @@ export const GradeSchema = z.object({
     .describe(
       "2-4 sentences of specific, actionable improvement feedback tied to the criteria; the feedback is the value, not just the gate. Do not use em dashes or en dashes; use commas, colons, or periods instead.",
     ),
+});
+
+// ---------- Phase 2: ATS scoring ----------
+
+export const AtsScoreSchema = z.object({
+  overallScore: z
+    .number()
+    .describe("0-100 overall ATS compatibility score, weighing keyword match, formatting, and section completeness"),
+  keywordMatchPercent: z
+    .number()
+    .describe("0-100: percent of the JD's must-have keywords (skills, tools, qualifications) found anywhere in the resume, case-insensitive, close variants count"),
+  matchedKeywords: z
+    .array(z.string())
+    .describe("Must-have JD keywords found in the resume, exactly as they should appear"),
+  missingKeywords: z
+    .array(z.string())
+    .describe("Must-have JD keywords absent from the resume, most important first, each written exactly as it should be added"),
+  formattingFlags: z
+    .array(
+      z.object({
+        id: z
+          .string()
+          .describe("One of: single_column, standard_headings, contact_in_body, consistent_dates, acronyms_expanded, skills_count, metrics_per_role, no_tables_graphics"),
+        label: z.string().describe("Short human label for this check"),
+        pass: z.boolean(),
+        detail: z
+          .string()
+          .describe("One specific sentence citing what was actually found, never generic advice"),
+      }),
+    )
+    .describe("Exactly these 8 checks, in this order: single-column layout, standard section headings, contact info in body (not header/footer), consistent date formatting, acronyms spelled out on first use, 10-12+ skills listed in the skills section, at least one metric per role in experience, no tables/graphics/icons/photos"),
+  sectionCompleteness: z
+    .array(
+      z.object({
+        section: z.string().describe("e.g. Contact, Summary, Skills, Experience, Education"),
+        present: z.boolean(),
+        detail: z.string().describe("What is present or missing, specifically"),
+      }),
+    )
+    .describe("Checks at minimum: Contact, Summary, Skills, Experience, Education"),
+  suggestions: z
+    .array(z.string())
+    .describe(
+      "3-6 specific, actionable suggestions, each naming an exact keyword, count, or phrase; e.g. 'Add \"stakeholder management\", appears 3 times in the JD, 0 times in your resume.' Never generic advice like 'improve your resume'.",
+    ),
+});
+
+// ---------- Phase 2: resume builder ----------
+
+export const BulletRewriteSchema = z.object({
+  bullets: z
+    .array(z.string())
+    .describe(
+      "2-4 polished resume bullets for this one role. Each starts with a strong action verb and includes a number, metric, or scale drawn ONLY from what the user provided; never invent a number, outcome, or fact not given. Achievements, not duties.",
+    ),
+  suggestions: z
+    .array(z.string())
+    .describe("3-5 specific, actionable improvement suggestions for this entry"),
+});
+
+export const JdTailorSchema = z.object({
+  jdKeywords: z
+    .array(z.string())
+    .describe("8-15 key skills/tools/qualifications extracted from the JD, ranked by importance"),
+  summaryRewrite: z
+    .string()
+    .describe(
+      "Rewritten 2-4 sentence professional summary using this person's real background, naturally mirroring the JD's language and priorities, never copy-pasting JD phrases verbatim",
+    ),
+  headerTitleSuggestion: z
+    .string()
+    .nullable()
+    .describe("Suggested resume headline aligned to the JD's target title, or null if the current one already fits"),
+  experienceReorders: z
+    .array(
+      z.object({
+        experienceId: z.string(),
+        orderedBullets: z
+          .array(z.string())
+          .describe(
+            "This entry's EXACT existing bullets, verbatim, reordered most-relevant-to-the-JD first. Do not edit, merge, or invent bullet text, only reorder the given ones.",
+          ),
+      }),
+    )
+    .describe("One entry per experience item that has bullets"),
+  skillsAligned: z
+    .array(z.string())
+    .describe(
+      "The candidate's existing core competencies, reordered and phrased to mirror the JD's priority order and terminology where truthfully applicable. Never add a skill the candidate doesn't already have listed.",
+    ),
+  suggestions: z
+    .array(z.string())
+    .describe("3-6 specific, actionable suggestions for better JD alignment"),
 });
 
 export const PathSchema = z.object({
