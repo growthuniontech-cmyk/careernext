@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/browser";
+import WorkspaceMenu from "./WorkspaceMenu";
 
 type CurrentUser = {
   name: string | null;
   email: string | null;
-  avatarUrl: string | null;
 };
 
 function LogoMark() {
@@ -45,8 +45,6 @@ function LogoMark() {
 export default function Header({ solid = false }: { solid?: boolean }) {
   const router = useRouter();
   const [user, setUser] = useState<CurrentUser | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isSupabaseConfigured()) return;
@@ -57,39 +55,23 @@ export default function Header({ solid = false }: { solid?: boolean }) {
       setUser({
         name: meta.full_name ?? meta.name ?? null,
         email: data.user.email ?? null,
-        avatarUrl: meta.avatar_url ?? meta.picture ?? null,
       });
     });
   }, []);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [menuOpen]);
 
   async function signOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
     setUser(null);
-    setMenuOpen(false);
     router.push("/");
     router.refresh();
   }
-
-  const displayName = user?.name || user?.email || "";
-  const initial = displayName.charAt(0).toUpperCase() || "?";
 
   return (
     <header
       className={`w-full ${solid ? "bg-indigo" : "bg-transparent absolute top-0 left-0 z-20"}`}
     >
-      <div className="mx-auto max-w-5xl px-5 py-4 flex items-center justify-between">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
         <Link
           href="/"
           className="flex items-center gap-2 font-heading font-bold text-xl text-white tracking-tight"
@@ -97,9 +79,13 @@ export default function Header({ solid = false }: { solid?: boolean }) {
           <LogoMark />
           Career<span className="text-teal">Next</span>
         </Link>
-        <div className="flex items-center gap-4">
+
+        {/* Single shared gap across nav links, Workspace, and the CTA keeps
+         *  the spacing rhythm consistent instead of drifting between them.
+         *  `contents` lets nav's own links join this flex row's gap directly. */}
+        <div className="flex items-center gap-3 text-sm font-medium text-white/80 sm:gap-4 lg:gap-8">
           {user && (
-            <nav className="hidden sm:flex items-center gap-4 text-sm font-medium text-white/80">
+            <nav className="hidden lg:contents">
               <Link href="/ats" className="hover:text-white transition-colors">
                 ATS Score
               </Link>
@@ -108,56 +94,10 @@ export default function Header({ solid = false }: { solid?: boolean }) {
               </Link>
             </nav>
           )}
-          {user && (
-            <div className="relative" ref={menuRef}>
-              <button
-                onClick={() => setMenuOpen((open) => !open)}
-                className="flex items-center gap-2 rounded-full text-white/90 hover:text-white transition-colors"
-                aria-expanded={menuOpen}
-              >
-                {user.avatarUrl ? (
-                  <img
-                    src={user.avatarUrl}
-                    alt=""
-                    className="h-7 w-7 rounded-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-teal text-sm font-semibold text-white">
-                    {initial}
-                  </span>
-                )}
-                <span className="hidden sm:inline text-sm max-w-[10rem] truncate">
-                  {displayName}
-                </span>
-              </button>
-              {menuOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-lg bg-white shadow-lg py-1 z-30">
-                  <div className="px-4 py-2 border-b border-black/10">
-                    {user.name && (
-                      <p className="text-sm font-medium text-charcoal truncate">
-                        {user.name}
-                      </p>
-                    )}
-                    {user.email && (
-                      <p className="text-xs text-charcoal/60 truncate">
-                        {user.email}
-                      </p>
-                    )}
-                  </div>
-                  <button
-                    onClick={signOut}
-                    className="w-full text-left px-4 py-2 text-sm text-charcoal hover:bg-black/5 transition-colors"
-                  >
-                    Sign out
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+          {user && <WorkspaceMenu user={user} onSignOut={signOut} />}
           <Link
             href="/start"
-            className="rounded-full bg-coral hover:bg-coral-dark transition-colors px-4 py-1.5 text-sm font-semibold text-white"
+            className="rounded-full bg-coral hover:bg-coral-dark transition-colors px-4 py-1.5 font-semibold text-white"
           >
             Find your path
           </Link>

@@ -165,6 +165,22 @@ h4 {
   animation-delay: var(--d, 0.4s);
 }
 
+/* ---- Header dropdown menus (workspace switcher, etc.) ---- */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown-in {
+  animation: dropdown-in 0.16s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -181,5 +197,8 @@ h4 {
   }
   .motif-dot {
     opacity: 1;
+  }
+  .dropdown-in {
+    animation: none;
   }
 }
